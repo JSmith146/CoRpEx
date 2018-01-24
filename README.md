@@ -1,7 +1,7 @@
 CoRpEx
 ================
 Jeffrey Smith
-17 January 2018
+24 January 2018
 
 <!--don't edit README.md go to README.Rmd instead-->
     ## Loading required package: rJava
@@ -54,3 +54,142 @@ This package requires no appearance/design constraints
 |     9| Term Association    | In-Work | Identifies words that are correlated with specific, user defined keywords and denotes the frequency of each word as they are mentioned over time. | Identifies words highly related to user defined words of interest to uncover more information in the corpus.                                                              | Corpus name, User defined term, Correlation limit (threshold) | Time series line plot of the frequency of documents containing the correlated terms                                        | Used to identify related terms in the analysis that could provide more insight into the data                                                                                |
 |    10| Corpus Plot         | In-Work | Allows the user to visualize the frequency of documents produced within a corpus over time.                                                       | Users can identify periods in the data where there were fluctuations in the frequency of documents produced.                                                              | Corpus name                                                   | Time series line plot of all document contained within a corpus.                                                           | Used to identify periods where fluctuations in the frequency of documents occur. Users would then isolate the dates in these regions for further study.                     |
 |    11| Keyword Search      | In-Work | Allows the user to visualize the frequency of documents, containing a specific keyword, produced within a corpus over time.                       | Based on a keyword, users can identify periods in the data where there was a fluctuation in the frequency of documents produced.                                          | Corpus name, User defined term                                | Time series line plot of all document contained within a corpus that contain a given keyword.                              | Used to identify periods where fluctuations in the frequency of documents occur, based on a keyword. Users would then isolate the dates in these regions for further study. |
+
+<table>
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Feature</th>
+<th>Status</th>
+<th>Description</th>
+<th>Values</th>
+<th>Inputs</th>
+<th>Outputs</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Topic Subset</td>
+<td>In-Work</td>
+<td>Allows the user to create an independent sub-corpus based on a keyword</td>
+<td>Users can reduce the size of the corpus based on information relevant to their research</td>
+<td>Corpus name, Keyword, New corpus name</td>
+<td>Creates a new sub-corpus from the original corpus containing only the documents that contain a specified key word.</td>
+<td>Users will isolate only relevant documents for the continuation of their analysis</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Isolate Dates</td>
+<td>In-Work</td>
+<td>Allows the user to create an independent sub-corpus based on a date range</td>
+<td>Users can reduce the size of the corpus based on information relevant to their research</td>
+<td>Corpus name, Start date, End date</td>
+<td>Creates a new sub-corpus from the original corpus containing only the documents within the date ranges.</td>
+<td>Users will isolate only relevant documents for the continuation of their analysis</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Merge Terms</td>
+<td>In-Work</td>
+<td>Allows the user to create, merge, and delete terms within a corpus</td>
+<td>Users can apply subject matter expertise to and remove noisy data from their analysis</td>
+<td>Corpus name, Term, Replacement term</td>
+<td>Changes the content of the current corpus, updating it with the information provided by the user.</td>
+<td>Users will apply custom information to the corpus based on subject matter or organizational information, and also remove noisy terms from the dataset.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Print N-grams</td>
+<td>In-Work</td>
+<td>Allows users to perform n-gram analysis on a corpus</td>
+<td>Users can navigate through varying n-grams to gain insight into the content of a corpus. Also, this plot provides a starting point to implement the merge terms function.</td>
+<td>Corpus name, N-gram, Number of terms to include (n)</td>
+<td>Creates an inverted bar chart with the top n most frequent n-grams identified</td>
+<td>Users will be able to infer the content of the corpus and identify terms that need to be created, merged, or deleted.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Bigram Network</td>
+<td>In-Work</td>
+<td>Performs network analysis on the most frequent bigrams found within a corpus</td>
+<td>Provides a visualization of bigram connections to allow the user to make inferences into the data.</td>
+<td>Corpus name, Frequency threshold</td>
+<td>Network graph visualization connecting words (nodes) based on the frequency of their occurrence next to each other (edges)</td>
+<td>Users will make inferences into the data based on this information</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Correlation Network</td>
+<td>In-Work</td>
+<td>Performs network analysis on the most frequently correlated terms found within a corpus</td>
+<td>Provides a visualization of correlated words found in a corpus to allow the user to make inferences into the data.</td>
+<td>Corpus name, Correlation threshold</td>
+<td>Network graph visualization connecting words (nodes) based on their correlation to one another (edges)</td>
+<td>Users will make inferences into the data based on this information</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Topic Number</td>
+<td>In-Work</td>
+<td>Provides the user with an estimate for the number of hidden topics within a corpus</td>
+<td>Presents the user with an expected number of k topics to use in the topic modeling analysis.</td>
+<td>Corpus name</td>
+<td>Maximization and minimization plots (ldatuning) of the estimated number of topics found within a corpus</td>
+<td>Users will determine an expected number of topics to designate in the topic plot function.</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Topic Plot</td>
+<td>In-Work</td>
+<td>Creates topic models for a corpus, designating each document within the corpus to a specific topic.</td>
+<td>Allows users to create sub-corpuses based on hidden topics found in a corpus.</td>
+<td>Corpus name, K topics</td>
+<td>Creates topic models for each document within the corpus.</td>
+<td>Users can create new corpuses based on hidden topics found in the corpus.</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Term Association</td>
+<td>In-Work</td>
+<td>Identifies words that are correlated with specific, user defined keywords and denotes the frequency of each word as they are mentioned over time.</td>
+<td>Identifies words highly related to user defined words of interest to uncover more information in the corpus.</td>
+<td>Corpus name, User defined term, Correlation limit (threshold)</td>
+<td>Time series line plot of the frequency of documents containing the correlated terms</td>
+<td>Used to identify related terms in the analysis that could provide more insight into the data</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Corpus Plot</td>
+<td>In-Work</td>
+<td>Allows the user to visualize the frequency of documents produced within a corpus over time.</td>
+<td>Users can identify periods in the data where there were fluctuations in the frequency of documents produced.</td>
+<td>Corpus name</td>
+<td>Time series line plot of all document contained within a corpus.</td>
+<td>Used to identify periods where fluctuations in the frequency of documents occur. Users would then isolate the dates in these regions for further study.</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>Keyword Search</td>
+<td>In-Work</td>
+<td>Allows the user to visualize the frequency of documents, containing a specific keyword, produced within a corpus over time.</td>
+<td>Based on a keyword, users can identify periods in the data where there was a fluctuation in the frequency of documents produced.</td>
+<td>Corpus name, User defined term</td>
+<td>Time series line plot of all document contained within a corpus that contain a given keyword.</td>
+<td>Used to identify periods where fluctuations in the frequency of documents occur, based on a keyword. Users would then isolate the dates in these regions for further study.</td>
+</tr>
+</tbody>
+</table>
+
+There is sufficient time for all features to be included in the current version of this analytic.
