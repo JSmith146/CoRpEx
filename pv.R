@@ -1,16 +1,16 @@
 pv <- function(FV, r, n = 5) {
   
-  # if(!is.atomic(FV)) {
-  #   stop('FV must be an atomic vector')
-  # }
+  if(!is.atomic(FV)) {
+    stop('FV must be an atomic vector') #To be atomic, every element in the vector is of the same class
+  }
   
-  # if(!is.numeric(FV) | !is.numeric(r) | !is.numeric(n)) {
-  #   stop('This function only works for numeric inputs!\n', 
-  #        'You have provided objects of the following classes:\n', 
-  #        'FV: ', class(FV), '\n',
-  #        'r: ', class(r), '\n',
-  #        'n: ', class(n))
-  # }
+  if(!is.numeric(FV) | !is.numeric(r) | !is.numeric(n)) {
+    stop('This function only works for numeric inputs!\n',
+         'You have provided objects of the following classes:\n',
+         'FV: ', class(FV), '\n',
+         'r: ', class(r), '\n',
+         'n: ', class(n))
+  }
   
   # if(r < 0 | r > .25) {
   #   message('The input for r exceeds the normal\n',
