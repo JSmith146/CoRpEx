@@ -1,0 +1,162 @@
+---
+title: "Identifying Core AF Infrustructure by Keywords"
+author: Joseph Buyer
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+    theme: spacelab
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+#Read in the different packages used in the model
+pacman::p_load(flexdashboard, 
+               shiny, 
+               gdata, 
+               dplyr, 
+               readr, 
+               scales, 
+               DT)
+
+#read in data
+FC <- readr::read_csv("J:/AFIT ENV GEM 17M/Buyer, Joseph/THESIS/R Model/FAC and CAT.csv")
+FC <- mutate_each(FC, funs(toupper))
+basic.cats <- readr::read_csv("J:/AFIT ENV GEM 17M/Buyer, Joseph/THESIS/R Model/Basic Categories.csv")
+cat.groups <- readr::read_csv("J:/AFIT ENV GEM 17M/Buyer, Joseph/THESIS/R Model/Category Group.csv")
+fac.classes <- readr::read_csv("J:/AFIT ENV GEM 17M/Buyer, Joseph/THESIS/R Model/Facility Class.csv")
+
+```
+
+Inputs {.sidebar}
+-----------------------------------------------------------------------
+
+```{r}
+#Create and define the different inputs and buttons used in the app
+  selectInput(inputId = "class", label = "Choose how to display results",
+              choices = c("Facility Class (1 digit)","Category Group (2 digit)","Basic Category (3 digit)"),selected = "Basic Category (3 digit)")
+
+  hr()
+
+  textInput(inputId = "keyWord", label = "Keyword", placeholder = "Type keywords here")
+  
+  actionButton(inputId = "action", label = "Add Word")
+  hr()
+  div(style="display:inline-block", actionButton(inputId = "reset", label = "Clear"))
+  
+  rv <- reactiveValues(words = data.frame(NULL))
+
+# When the Submit button is clicked, save the input form data
+observeEvent(input$action, {
+  
+  `if`(is.null(rv$words),
+       rv$words <- data.frame(input$keyWord, stringsAsFactors = F),
+       rv$words <- data.frame(c(rv$words,input$keyWord), stringsAsFactors = F))
+  
+})
+
+observeEvent(input$reset, {
+  rv$words <- data.frame(NULL)
+})
+  
+```
+
+Row {data-width=650} {.tabset .tabset-fade} 
+-----------------------------------------------------------------------
+
+### CATCODEs and FAC Codes with Titles and Descriptions
+
+```{r}
+#Code chunk that displays table showing real property data
+DT::renderDataTable({
+  
+keyword2 <- paste(toupper(as.vector(unlist(rv$words))), collapse = '|')
+
+FC3 <- unlist(lapply(X = 1:nrow(FC[,3]), FUN = function(x) grepl(keyword2, FC[x,3])))
+FC4 <- unlist(lapply(X = 1:nrow(FC[,3]), FUN = function(x) grepl(keyword2, FC[x,4])))
+
+either <- as.numeric(FC3==1) + as.numeric(FC4==1)
+
+DT::datatable(FC[which(either > 0),], options = list(searchHighlight = TRUE), rownames = F, fillContainer = T) 
+})
+
+```
+
+
+### Model Results
+
+```{r}
+#Code chunk that displays the model results by user-chosen grouping
+DT::renderDataTable({
+  
+keyword2 <- paste(toupper(as.vector(unlist(rv$words))), collapse = '|')
+
+FC3 <- unlist(lapply(X = 1:nrow(FC[,3]), FUN = function(x) grepl(keyword2, FC[x,3])))
+FC4 <- unlist(lapply(X = 1:nrow(FC[,3]), FUN = function(x) grepl(keyword2, FC[x,4])))
+
+either <- as.numeric(FC3==1) + as.numeric(FC4==1)
+
+basic.cats <- subset(basic.cats, basic.cats[,3] > 0)
+cat.groups <- subset(cat.groups, cat.groups[,3] > 0)
+fac.classes <- subset(fac.classes, fac.classes[,3] > 0)
+
+for(i in 1:nrow(basic.cats))
+{
+  basic.cats[i,4] <- sum(substr(data.frame(FC[which(either > 0),])[,1],1,3)%in%basic.cats[i,1])
+  basic.cats[i,6] <- percent(as.numeric(basic.cats[i,4])/as.numeric(basic.cats[i,3]))
+}
+
+for(i in 1:nrow(cat.groups))
+{
+  cat.groups[i,4] <- sum(substr(data.frame(FC[which(either > 0),])[,1],1,2)%in%cat.groups[i,1])
+  cat.groups[i,6] <- percent(as.numeric(cat.groups[i,4])/as.numeric(cat.groups[i,3]))
+}
+
+for(i in 1:nrow(fac.classes))
+{
+  fac.classes[i,4] <- sum(substr(data.frame(FC[which(either > 0),])[,1],1,1)%in%fac.classes[i,1])
+  fac.classes[i,6] <- percent(as.numeric(fac.classes[i,4])/as.numeric(fac.classes[i,3]))
+}
+
+basic.cats$`Core Msn Key Words Count` = NULL
+cat.groups$`Core Msn Key Words Count` = NULL
+fac.classes$`Core Msn Key Words Count` = NULL
+
+results <- switch(as.character(input$class),
+"Facility Class (1 digit)" = fac.classes,
+"Category Group (2 digit)" = cat.groups,
+"Basic Category (3 digit)" = basic.cats)
+
+  
+DT::datatable(results, 
+              rownames = FALSE, 
+              options = list(columnDefs = list(list(className = 'dt-center', targets = "_all"))),
+              fillContainer = T
+              ) %>% DT::formatStyle(
+                "Percent Considered Core",
+                color = 'red',
+                fontWeight = 'bold'
+              )
+})
+```
+
+Row {data-height=250}
+-----------------------------------------------------------------------
+
+### Selected Keywords
+
+```{r}
+
+# Table that shows all previous user input keywords
+# (update with current response when Submit is clicked)
+DT::renderDataTable({
+  
+  DT::datatable(data.frame(unlist(rv$words), stringsAsFactors = F), 
+                rownames = F, colnames = 'Used Words', 
+                fillContainer = T, 
+                caption = htmltools::tags$caption(
+                  'This table shows all the ', htmltools::em('keywords'), ' that are in use')
+    )
+  
+})     
+```

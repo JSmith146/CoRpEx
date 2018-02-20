@@ -1,0 +1,437 @@
+---
+title: 'Identifying Partnership Opportunities: A GIS Approach'
+author: "Corey DeGroot"
+resource_files:
+- App Data/Base Libs/alts_Libs.txt
+- App Data/Base Libs/andw_Libs.txt
+- App Data/Base Libs/arnl_Libs.txt
+- App Data/Base Libs/bckl_Libs.txt
+- App Data/Base Libs/beal_Libs.txt
+- App Data/Base Libs/blln_Libs.txt
+- App Data/Base Libs/brkd_Libs.txt
+- App Data/Base Libs/brks_Libs.txt
+- App Data/Base Libs/chrl_Libs.txt
+- App Data/Base Libs/clmb_Libs.txt
+- App Data/Base Libs/cnnn_Libs.txt
+- App Data/Base Libs/crch_Libs.txt
+- App Data/Base Libs/dovr_Libs.txt
+- App Data/Base Libs/dvsm_Libs.txt
+- App Data/Base Libs/dyss_Libs.txt
+- App Data/Base Libs/edwr_Libs.txt
+- App Data/Base Libs/egln_Libs.txt
+- App Data/Base Libs/ells_Libs.txt
+- App Data/Base Libs/fewr_Libs.txt
+- App Data/Base Libs/frch_Libs.txt
+- App Data/Base Libs/gdfl_Libs.txt
+- App Data/Base Libs/gntr_Libs.txt
+- App Data/Base Libs/grnf_Libs.txt
+- App Data/Base Libs/hill_Libs.txt
+- App Data/Base Libs/hllm_Libs.txt
+- App Data/Base Libs/hnsc_Libs.txt
+- App Data/Base Libs/hrlf_Libs.txt
+- App Data/Base Libs/krtl_Libs.txt
+- App Data/Base Libs/kslr_Libs.txt
+- App Data/Base Libs/lckl_Libs.txt
+- App Data/Base Libs/lghl_Libs.txt
+- App Data/Base Libs/lngl_Libs.txt
+- App Data/Base Libs/lsan_Libs.txt
+- App Data/Base Libs/lttr_Libs.txt
+- App Data/Base Libs/luke_Libs.txt
+- App Data/Base Libs/mcch_Libs.txt
+- App Data/Base Libs/mccn_Libs.txt
+- App Data/Base Libs/mcdl_Libs.txt
+- App Data/Base Libs/mcgr_Libs.txt
+- App Data/Base Libs/mint_Libs.txt
+- App Data/Base Libs/mlms_Libs.txt
+- App Data/Base Libs/mnth_Libs.txt
+- App Data/Base Libs/mody_Libs.txt
+- App Data/Base Libs/mxwl_Libs.txt
+- App Data/Base Libs/nlls_Libs.txt
+- App Data/Base Libs/offt_Libs.txt
+- App Data/Base Libs/otis_Libs.txt
+- App Data/Base Libs/pope_Libs.txt
+- App Data/Base Libs/ptrc_Libs.txt
+- App Data/Base Libs/ptrs_Libs.txt
+- App Data/Base Libs/rbns_Libs.txt
+- App Data/Base Libs/rndl_Libs.txt
+- App Data/Base Libs/schr_Libs.txt
+- App Data/Base Libs/sctt_Libs.txt
+- App Data/Base Libs/shaw_Libs.txt
+- App Data/Base Libs/shpp_Libs.txt
+- App Data/Base Libs/symj_Libs.txt
+- App Data/Base Libs/tnkr_Libs.txt
+- App Data/Base Libs/trvs_Libs.txt
+- App Data/Base Libs/tynd_Libs.txt
+- App Data/Base Libs/usaf_Libs.txt
+- App Data/Base Libs/vanc_Libs.txt
+- App Data/Base Libs/vndn_Libs.txt
+- App Data/Base Libs/whtm_Libs.txt
+- App Data/Base Libs/wrgp_Libs.txt
+output:
+  flexdashboard::flex_dashboard:
+    orientation: rows
+runtime: shiny
+---
+
+<style>
+h1 {font-size: 20pt;
+    font-weight: bold;}
+p {font-size: 120%;}
+form p {font-size: 100%;}
+ul li ul li p {font-size: 100%;}
+ul li p {font-size: 140%;}
+li {font-size: 120%;}
+a {font-size: 140%; font-weight: bold;}
+blockquote { font-size: 160%;
+             line-height: 1.5em;
+             font-weight: normal;
+             margin: 50px 10% 50px 10%;
+             padding: 30px;
+             border-bottom-width: thin;
+             border-right-width: 12px;
+             border-top-width: thin;
+             border-left-width: 12px;
+             border-radius: 10px;
+             border-color: #149C82;
+             border-style: solid;
+             font-family: "Century Gothic", "Optima", "Segoe UI", sans-serif;
+            }
+</style>
+
+Background
+==================
+
+> This research effort investigated the off-base community to build a tool to identify installations which should explore partnership opportunities. The scope of this research was limited to exploring library partnership opportunities at Air Force installations located in the Continental United States (CONUS).  The result of this research is a tool which produces a relative measure for each off-base community, where higher values indicate a greater potential for partnerships.  This relative measure utilizes inverse distance weighting (IDW) between an installation and each service location in the surrounding community. The tool can be used by decision makers to compare the computed measures and communities for each installation, and identify where the greatest opportunity for creating a partnership may exist. 
+
+- Methodology Tab: This section of the app explains the analysis that is utilized.  It provides a review of Inverse Distance Weighting (IDW), and how library sizes were estimated.
+  
+- Analysis Tab: This section of the app presents the results of the IDW analysis.  It allows users to investigate the libraries around a specific installation and specified radius.  Users can select the installation of interest, define the radius around the installation that should be considered, and select whether straight line distance or driving distances should be used in the analysis.
+  
+```{r, echo=FALSE, eval=FALSE}
+shiny::includeMarkdown('text.Rmd')
+```
+
+
+
+
+Methodology
+==================================
+
+<h1>Analysis</h1>
+
+- Inverse-Distance-Weighted (IDW) Average
+
+    - Tobler’s First Law: “All things are related, but nearby things are more related than distant things”
+    
+    - Uses known values to estimate value at nearby points
+    
+    - Library index estimates the value of the libraries surrounding the installation
+
+$$
+\begin{equation}
+\hspace{-700px} \displaystyle Z = \frac{\sum_{i=1}^{n}z_i\times d_i^{-2}}{\sum_{i=1}^{n}d_i^{-2}}
+\end{equation}
+$$
+
+- Where
+
+    - $d_i \equiv$ Distance from service to installation
+
+    - $Z_i \equiv$ Quality of the library (Size)
+    
+
+<h1>Library Size Estimate</h1>
+
+- Collection Space = $13*(N_b+N_v+N_a)+(45*N_i)$
+
+    - $N_b \equiv$ Number of books
+    
+    - $N_v \equiv$ Number of serial volumes
+    
+    - $N_a \equiv$ Number of audio visual materials
+    
+    - $N_i \equiv$ Number of internet terminals
+    
+- Work Space = $150*N_w+30*N_s/1000$
+
+    - $N_w \equiv$ Number of workstations
+    
+    - $N_s \equiv$ Number of seats
+
+- Library Size = Collection Space + Work Space
+
+
+
+    
+
+
+```{r eval=TRUE}
+absolutePanel(tags$img(src = "IDW.png", height = "600px"),
+              top = "200px",
+              left = "1000px"
+)
+
+```
+
+
+```{r eval=FALSE}
+shiny::img(src = "IDW.png", height = "600px", top = "20px",    left = "100px"
+)
+
+```
+
+Analysis
+======================================
+
+
+```{r global, include=FALSE}
+library(flexdashboard)
+library(data.table)
+library(leaflet)
+library(DT)
+
+IDW_straight <- read.table("App Data/IDW/Straight1.txt", header = TRUE, stringsAsFactors = F)
+colnames(IDW_straight) <- c("Base Name", "Short Name", "Abbr", "Long", "Lat", "IDW - 5 Miles", "IDW Normalized - 5 Miles",
+                            "IDW - 10 Miles", "IDW Normalized - 10 Miles", "IDW - 15 Miles", "IDW Normalized - 15 Miles",
+                            "IDW - 20 Miles", "IDW Normalized - 20 Miles", "IDW - 25 Miles", "IDW Normalized - 25 Miles",
+                            "IDW - 30 Miles", "IDW Normalized - 30 Miles", "IDW - 35 Miles", "IDW Normalized - 35 Miles",
+                            "IDW - 40 Miles", "IDW Normalized - 40 Miles", "IDW - 45 Miles", "IDW Normalized - 45 Miles",
+                            "IDW - 50 Miles", "IDW Normalized - 50 Miles", "IDW - 55 Miles", "IDW Normalized - 55 Miles",
+                            "IDW - 60 Miles", "IDW Normalized - 60 Miles", "IDW - 65 Miles", "IDW Normalized - 65 Miles", 
+                            "IDW - 70 Miles", "IDW Normalized - 70 Miles", "IDW - 75 Miles", "IDW Normalized - 75 Miles", 
+                            "IDW - 80 Miles", "IDW Normalized - 80 Miles", "IDW - 85 Miles", "IDW Normalized - 85 Miles", 
+                            "IDW - 90 Miles", "IDW Normalized - 90 Miles", "IDW - 95 Miles", "IDW Normalized - 95 Miles", 
+                            "IDW - 100 Miles", "IDW Normalized - 100 Miles")
+
+IDW_drive <- read.table("App Data/IDW/Drive1.txt", header = TRUE, stringsAsFactors = F)
+colnames(IDW_drive) <- c("Base Name", "Short Name", "Abbr", "Long", "Lat", "IDW - 5 Miles", "IDW Normalized - 5 Miles",
+                         "IDW - 10 Miles", "IDW Normalized - 10 Miles", "IDW - 15 Miles", "IDW Normalized - 15 Miles",
+                         "IDW - 20 Miles", "IDW Normalized - 20 Miles", "IDW - 25 Miles", "IDW Normalized - 25 Miles",
+                         "IDW - 30 Miles", "IDW Normalized - 30 Miles", "IDW - 35 Miles", "IDW Normalized - 35 Miles",
+                         "IDW - 40 Miles", "IDW Normalized - 40 Miles", "IDW - 45 Miles", "IDW Normalized - 45 Miles",
+                         "IDW - 50 Miles", "IDW Normalized - 50 Miles", "IDW - 55 Miles", "IDW Normalized - 55 Miles",
+                         "IDW - 60 Miles", "IDW Normalized - 60 Miles", "IDW - 65 Miles", "IDW Normalized - 65 Miles", 
+                         "IDW - 70 Miles", "IDW Normalized - 70 Miles", "IDW - 75 Miles", "IDW Normalized - 75 Miles", 
+                         "IDW - 80 Miles", "IDW Normalized - 80 Miles", "IDW - 85 Miles", "IDW Normalized - 85 Miles", 
+                         "IDW - 90 Miles", "IDW Normalized - 90 Miles", "IDW - 95 Miles", "IDW Normalized - 95 Miles", 
+                         "IDW - 100 Miles", "IDW Normalized - 100 Miles")
+
+Base_Locs <- read.table("App Data/Base_Locations.txt", header = TRUE, stringsAsFactors = F)
+Base_Locs <- Base_Locs[-c(2, 19, 21, 28),]
+
+
+
+
+```
+
+
+Inputs {.sidebar}
+-----------------------------------------------------------------------
+
+```{r}
+  sliderInput(inputId = "rad", label = "Radius Around the Base:",
+              min = 5, max = 100, value = 50,
+              step = 5)
+  
+  selectInput(inputId = "base", label = "Installation:",
+              choices = Base_Locs[,1], selected = NULL)
+  
+  selectInput(inputId = "mode", label = "Distance Mode:",
+              choices = c("Straight Line Distance", "Driving Distance"),
+              selected = NULL)
+```
+
+Inputs:
+
+  Radius Around the Base: This input will change the community around the base that is considered.  Libraries outside of this radius will not be used in the analysis.
+
+  Installation:  This input selects the installation that is viewed in the map and library list.
+
+  Distance Mode:  This changes whether straight line distance or driving distance is used in the analysis.
+  
+Panels:
+
+Map:  The map provides a visual display of the installation that is selected and the libraries that are within the defined radius.
+
+IDW Measure:  The IDW measure is the result produced for a specified radius and distance mode.  
+
+Library List:  The libraries listed here are the libraries that fall within the specified radius of the selected installation.  They are sorted by either straight line distance or driving distance depending on the distance mode selected.
+ 
+  
+Row {data-height=550}
+-----------------------------------------------------------------------
+
+### Map
+
+```{r}
+
+
+  
+output$basemap <- renderLeaflet({
+  
+  base.loc <- Base_Locs[which(Base_Locs[,1]%in%input$base),]
+  file.location <- "App Data/Base Libs/"
+  inst <- as.character(input$base)
+  base_lib <- read.table(paste(c(file.location, IDW_straight[which(IDW_straight[, 1] == inst), 3], "_Libs.txt"), collapse = ""), 
+                         header = TRUE, stringsAsFactors = FALSE)
+  colnames(base_lib) <- c("Library Name", "Service Area Population", "Address", "Latitude", "Longitude", "Central Libraries",
+                          "Branch Libraries", "Total Staff", "Print Materials", "Audio Materials", "Video Materials", "Print Serials",
+                          "Computers", "Collection Space", "Seats Per", "Work Space", "Size", "Distance", "Weight", "SizeWeight",
+                          "Drive Distance", "Drive Weight", "Drive SizeWeight")
+  base_lib <- subset(base_lib, base_lib[, "Distance"] <= input$rad)
+  
+  # redStar <- makeIcon(
+  #   iconUrl <- "C:/Files/Documents/R/publicLibs/inst/extdata4/App Data/red_star.png",
+  #   iconWidth <- 10, iconHeight <- 40,
+  #   iconAnchorX <- 22, iconAnchorY <- 94,
+  # )
+  
+  leaflet() %>%
+    addTiles() %>%
+    addCircleMarkers(base_lib$Longitude,
+                     base_lib$Latitude,
+                     color = "blue",
+                     radius = 6,
+                     fill = T,
+                     fillOpacity = 1,
+                     opacity = 1,
+                     popup = paste(base_lib$`Library Name`, "<br>",
+                                   base_lib$Address)) %>%
+
+    addCircleMarkers(base.loc$Longitude,
+                     base.loc$Latitude,
+                     color = "red",
+                     radius = 6,
+                     fill = T,
+                     fillOpacity = 1,
+                     opacity = 1,
+                     popup = base.loc$Base..Long.Name.) %>%
+  
+    # addMarkers(base_lib$Longitude,
+    #            base_lib$Latitude,
+    #            popup = base_lib$Address) %>%
+
+    # addMarkers(base.loc$Longitude,
+    #            base.loc$Latitude,
+    #            popup = base.loc$Base..Abbreviation.,
+    #            icon = redStar) %>%
+    
+    addLegend("bottomleft",
+              title = "Legend",
+              colors = c("Red", "Blue"),
+              labels = c("Air Force Base", "Library"),
+              opacity = 1)
+})
+
+
+leafletOutput("basemap", width = "100%", height = "100%")
+
+
+```
+
+### IDW Measure
+
+```{r}
+  
+IDWData <- reactive({
+  
+  if(input$mode == "Straight Line Distance" ) {
+    CONUS_Locations <- IDW_straight
+  }
+    else {
+      CONUS_Locations <- IDW_drive
+    }
+  
+  IDW <- as.data.table(CONUS_Locations)
+  var <- paste(c("IDW - ", input$rad, " Miles"), collapse = '')
+  IDW <- IDW[order(-IDW[[var]])][,"Overall Rank" := 1:.N]
+  IDW <- as.data.frame(IDW)
+  IDW <- IDW[, c("Base Name", paste(c("IDW - ", as.character(input$rad), " Miles"), collapse = ''),
+                 paste(c("IDW Normalized - ", as.character(input$rad), " Miles"), collapse = ''), 
+                 "Overall Rank")]
+  
+  
+})
+
+  renderTable(IDWData(), digits = 3)
+  
+  # "IDW - 5 Miles", "IDW Normalized - 5 Miles",
+  
+  # IDW <- as.data.table(CONUS_Locations)
+  # var <- paste(input$rad, "Miles")
+  # IDW <- IDW[order(-IDW[[var]])][,"Overall Rank" := 1:.N]
+  # IDW <- as.data.frame(IDW)
+  # IDW <- IDW[, c("Base Name", paste(as.character(input$rad), "Miles"), "Overall Rank")]
+  
+  # paste("Std_", as.character(input$rad), "_Miles")
+
+```
+
+Row {data-height=450}
+-----------------------------------------------------------------------
+
+### Library List
+
+```{r}
+
+  file.location <- "App Data/Base Libs/"
+
+  selectedData <- reactive({
+    
+    
+    
+    inst <- as.character(input$base)
+    base_lib <- read.table(paste(c(file.location, IDW_straight[which(IDW_straight[, 1] == inst), 3], "_Libs.txt"), collapse = ""),
+                           header = TRUE, stringsAsFactors = FALSE)
+    colnames(base_lib) <- c("Library Name", "Service Area Population", "Address", "Latitude", "Longitude",
+                            "Central Libraries", "Branch Libraries", "Total Staff", "Print Materials",
+                            "Audio Materials", "Video Materials", "Print Serials", "Computers", "Collection Space",
+                            "Seats Per", "Work Space", "Size", "Distance", "Weight", "SizeWeight", "Drive Distance",
+                            "Drive Weight", "Drive SizeWeight")
+    
+    if(input$mode == "Straight Line Distance" ) {
+      
+      col <- c("Library Name", "Service Area Population", "Central Libraries", "Branch Libraries",
+               "Total Staff", "Print Materials", "Audio Materials", "Video Materials", "Print Serials",
+               "Computers", "Collection Space", "Seats Per", "Work Space", "Size", "Distance", "Weight", "SizeWeight")
+      libs_straight <- base_lib[, paste(col)]
+      base_lib.sub <- subset(libs_straight, libs_straight[, "Distance"] <= input$rad)
+      base_lib.sub <- as.data.table(base_lib.sub)
+      base_lib.sub <- base_lib.sub[order(base_lib.sub$Distance)]
+      base_lib.sub <- as.data.frame(base_lib.sub)
+      
+  #     var <- paste(input$rad, "Miles")
+  # IDW <- IDW[order(-IDW[[var]])]
+    }
+    else {
+      col <- c("Library Name", "Service Area Population", "Central Libraries", "Branch Libraries",
+               "Total Staff", "Print Materials", "Audio Materials", "Video Materials", "Print Serials",
+               "Computers", "Collection Space", "Seats Per", "Work Space", "Size", "Distance", "Drive Distance", 
+               "Drive Weight", "Drive SizeWeight")
+      libs_drive <- base_lib[, paste(col)]
+      base_lib.sub <- subset(libs_drive, libs_drive[, "Distance"] <= input$rad)
+      base_lib.sub <- as.data.table(base_lib.sub)
+      base_lib.sub <- base_lib.sub[order(base_lib.sub$'Drive Distance')]
+      base_lib.sub <- as.data.frame(base_lib.sub)
+      
+    }
+    
+    
+    
+    # datatable(base_lib.sub, rownames = FALSE, extensions = 'Scroller',
+    #       options = list(scrollY = 200, scroller = TRUE, columnDefs = list(list(className = 'dt-left', targets = 0:3))))
+  })
+
+
+  renderTable(selectedData(), digits = 2)
+  
+  
+  
+  
+
+## options=list(scrollX=TRUE, scrolly = TRUE)
+ 
+
+```
+
+
