@@ -1,4 +1,10 @@
 ---
+output:
+  github_document: default
+  html_document: default
+---
+[![Build Status](https://travis-ci.org/JSmith146/CoRpExsvg?branch=master)](https://travis-ci.org/JSmith146/CoRpEx)
+---
 title: "CorpEx"
 author: "Jeffrey Smith"
 date: "`r format(Sys.Date(), '%d %B %Y')`"

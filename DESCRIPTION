@@ -1,12 +1,22 @@
 Package: CorpEx
 Type: Package
-Title: CorpEx is Designed for the Exploration and Mining of Large Textual Corpuses of Documents.
+Title: CorpEx is Designed for the Exploration and Mining of Large Textual Corpuses of Documents
 Version: 1.0
 Date: 2018-01-17
 Author: Jeffrey Smith 
-Maintainer: Jeffrey Smith <mr.jeffrey.smithjr@gmail.com>
-Description: The CorpEx package is designed for novice R users who require the ability to manuever through large corpuses of textual documents. This package will provide users with the ability to effectively and efficiently explore these large textual data corpuses through the utilization of various exploratory text mining techniques.This package will also allow users the ability to manipulate the content of the corpus by creating, merging, separating, and deleting terms found within a corpus. Additionally, this package will provide visualizations to users during their exploratory navigation through each corpus. Implementation of this package will require that users have a robust data frame with, at a minimum, columns identified for the document Id, date, and text data.
+Maintainer: Jeffrey Smith <mrjeffreysmithjr@gmail.com>
+Description: The CorpEx package is designed for novice R users who require the 
+             ability to manuever through large corpuses of textual documents. 
+             This package will provide users with the ability to effectively and efficiently 
+             explore these large textual data corpuses through the utilization of various 
+             exploratory text mining techniques.This package will also allow users the ability to 
+             manipulate the content of the corpus by creating, merging, separating, and deleting terms 
+             found within a corpus. Additionally, this package will provide visualizations to users 
+             during their exploratory navigation through each corpus. Implementation of this package will 
+             require that users have a robust data frame with, at a minimum, columns identified for the 
+             document Id, date, and text data.
 License: GPL (>= 2)
-Imports: Rcpp (>= 0.12.13)
-LinkingTo: Rcpp
+Imports: tm, tidytext, ggplot2, shiny, scales, ggraph, widyr, tidyr, dplyr, igraph, ldatuning, topicmodels
 RoxygenNote: 6.0.1
+Depends: R (>= 2.10)
+

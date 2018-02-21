@@ -1,3 +1,4 @@
-#' @useDynLib CoRpEx
-#' @importFrom Rcpp evalCpp 
-NULL
+# @title title
+# @description description
+# @keywords internal
+#"_PACKAGE"
