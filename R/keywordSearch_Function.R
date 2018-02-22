@@ -10,7 +10,7 @@
 ####################KEYWORD SEARCH###############################
 kwsearch<-function(data.td,keyword){
   
-  if(class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
+  if(!class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
   if(!class(data.td$date) %in% "Date") stop('Data in the "date" column is not in the correct form \n Data must be of class "Date"')
   if(!is.character(keyword)) stop('The term needs to be a character vector')
   if(grepl(" ",keyword)) stop('Term must be a single token. No spaces')

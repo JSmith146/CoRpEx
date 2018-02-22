@@ -11,7 +11,7 @@
   #########Word Correlation######
    cor.network<-function(data.td,corlimit){
      #Error Checking
-     if(class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
+     if(!class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
      if(length(corlimit)!=1 | !is.numeric(corlimit) | corlimit >1 | corlimit <0) stop('Correlation limit must be a single value between 0 and 1')
      
     book_words <- data.td %>%

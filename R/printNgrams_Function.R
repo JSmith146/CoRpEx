@@ -13,7 +13,7 @@
 ngram.print<-function(data.td, ngram=1, num=15){
   ngram<-quo(ngram)
   num <- quo(num)
-  if(class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
+  if(!class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
   if(!is.integer(ngram)| ngram >5) stop('The n-gram must be an integer and less than 6')
   
   if(ngram==1){

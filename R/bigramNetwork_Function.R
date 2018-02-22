@@ -10,7 +10,7 @@
 
 #########Bigram Network################
 bigram.network <- function(data.td, freq){
-  if(class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
+  if(!class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
   if(!is.integer(freq)) stop('The frequency must be an integer')
   
   

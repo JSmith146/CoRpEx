@@ -5,10 +5,7 @@
 #' @param app_name Character string for a directory in this package
 #' @param ...      Additional options passed to shinyApp
 #' @return A printed shiny app
-#' @examples 
-#' \dontrun{runmyapp('myfirstApp')
-#' }
-#' @importFrom shiny shinyAppDir, runApp
+#' @importFrom shiny shinyAppDir runApp
 #' @export
 
 runmyapp <- function(app_name,...){

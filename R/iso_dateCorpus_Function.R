@@ -11,7 +11,7 @@
 #This function will create a subset of topics based on identified date ranges
 iso.date<- function(data.td,Beg.date,End.date){
   #Error checking performs check of data class
-  if(class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
+  if(!class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
   if(!class(data.td$date) %in% "Date") stop('Data in the "date" column is not in the correct form \n Data must be of class "Date"')
   
   date.type <- c("%d%b%Y","%d%B%Y","%m-%d-%Y","%d-%m-%Y","%Y-%m-%d")

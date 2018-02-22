@@ -17,7 +17,3 @@ A printed shiny app
 \description{
 Runs as shiny app
 }
-\examples{
-\dontrun{runmyapp('myfirstApp')
-}
-}

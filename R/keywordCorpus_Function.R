@@ -10,7 +10,7 @@ keyword.corpus<- function(data.td,keyword){
   
   keyword<- quo(keyword)
   #Error checking performs check of data class
-  if(class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
+  if(!class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
   #is character
   if(!is.character(keyword)) stop('The term needs to be a character vector')
   if(grepl(" ",keyword)) stop('Term must be a single token. No spaces')
@@ -18,5 +18,5 @@ keyword.corpus<- function(data.td,keyword){
   sub.topic <- data.td %>% 
     filter(grepl(pattern = keyword,x = ~text, ignore.case =T)) 
   
-  # return(sub.topic)
+  return(sub.topic)
 }

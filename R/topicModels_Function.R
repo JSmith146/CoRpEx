@@ -17,7 +17,7 @@ topic.models <- function(data.td,k=16,x=.90){
   k<- quo(k)
   x<- quo(x)
   #Error checking performs check of data class
-  if(class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
+  if(!class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
   
 
   custom_reader1 <- readTabular(

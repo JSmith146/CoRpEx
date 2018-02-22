@@ -10,7 +10,7 @@
 topic.number <- function(data.td,x=.90){
   x<- quo(x)
   #Error checking performs check of data class
-  if(class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
+  if(!class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
 
   # Convert the data frame to a Corpus
   custom_reader1 <- readTabular(
