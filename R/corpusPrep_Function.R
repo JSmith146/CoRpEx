@@ -1,17 +1,49 @@
-#' @title Allows the user check and prepare their corpus to be in a usable state for the remainder of the commands
-#' @description description
+#' @title Check and prepare a corpus for use with functions in this package
+#' @description For best use with this function it is best that data frames have
+#'   values for the following columns:
+#'   \describe{
+#'     \item{Title}{Character vector containing the title of each document}
+#'     \item{Author}{Character vector containing the name of the associated
+#'     author}
+#'     \item{Date}{Vector of publication dates in either the "Date","POSIXct",
+#'     or "POSIXt" format}
+#'     \item{}{Dates should be one of the following forms:}
+#'       \item{}{yyyymmdd hh:mm:ss ex.("20170806 00:00:00")}
+#'       \item{}{yyyy-mm-dd ex.("2017-08-06")}
+#'       \item{}{yyyymmdd ex.("20170806")}
+#'       \item{}{mm-dd-yyyy ex.("08-06-2017")}
+#'       \item{}{dd-mm-yyyy ex.("06-08-2017")}
+#'       \item{}{ddmmyyyy ex.("06082017")}
+#'     \item{URL}{Character vector of associated url links}
+#'     \item{source}{Character vector of associated publication sources}
+#'     \item{ArticleNo}{Numeric vector of associated identification numbers of
+#'     each document}
+#'     \item{Text}{Character vector containing the body of the text to be
+#'     analyzed}
+#'     }
 #' @param data.td A tidy dataset
-#' @return Returns the same corpus, with appropriate column names, correct column classes, and prepped data
+#' @return Returns the corpus with correct column names and classes for further
+#'   analysis
 #' @export
-#' @import tidyr tm dplyr stringr tidytext
-#' @importFrom lubridate ymd_hms ymd mdy dmy 
+#' @import tidyr 
+#' @import dplyr
+#' @import stringr
+#' @import tidytext
+#' @import rlang
+#' @import tm
+#' @importFrom lubridate ymd_hms ymd mdy dmy
+#' @examples
+#' \donttest{
+#' clean_data<-corpusPrep(mayAritcles) 
+#' }
+
 
 #Bring in the data
 corpusPrep <- function(data.td){
-
+  `%>%` <- dplyr::`%>%`
 #Error check for correct data class
-if(!class(data.td) %in% c("tbl_df","tbl","data.frame")) stop('Data is not in the correct form \n Data must be in a tibble or data frame')
-
+  if(as.logical(sum(class(data.td) %in% c("tbl_df","tbl","data.frame")==0))) stop('Data is not in the correct form Data must be in a tibble or data frame')
+  
 columns<- names(data.td)
 
 for(i in 1:length(columns)){
@@ -44,7 +76,7 @@ Encoding(data.td$Text)  <- "UTF-8"
 data.td$Text <- gsub("\n","",data.td$Text)
 data.td$Text <- gsub("\t","",data.td$Text)
 
-# Check for dates
+# Check for dates---------------------------------------------------------------
 date_info<-readline("Does your data use date/time? Please Enter (Y/N):   ")
 while(!date_info %in% c("Y","y","N","n")){
   date_info<-readline("Does your data use date/time? Please Enter (Y/N):   ")
@@ -68,7 +100,11 @@ if(date_info=="Y"|date_info=="y"){
    colnames(data.td)[date_col_num]<- "Date"
    
    #Format Date
-   if(!class(data.td$Date[1]) %in% c("Date","POSIXct","POSIXt")){
+   if(!as.logical(sum(class(data.td$Date) %in% c("Date","POSIXct","POSIXt")==0))){
+     
+    stop('Data is not in the correct form Data must be in a tibble or data frame')
+     
+    } else {
      ##Convert all rows to character
      data.td$Date<- unlist(lapply(data.td$Date, as.character))
    }
@@ -109,13 +145,13 @@ if(date_info=="Y"|date_info=="y"){
     }
 
 
-# Clean/create title column
+# Clean/create title column-----------------------------------------------------
 
 ## Check for titles
 title_info<-readline('Does the data frame have titles associtated with each instance? (Y/N):  ')
 
 while(!title_info %in% c("Y","y","N","n")){
-  date_info<-readline("Does the data frame have titles associtated with each instance? (Y/N):   ")
+  title_info<-readline("Does the data frame have titles associtated with each instance? (Y/N):   ")
 }
 
 if(title_info=="Y"|title_info=="y"){
@@ -132,19 +168,19 @@ title_col_num<-match(title_col,columns)
 colnames(data.td)[title_col_num]<- "Title"
 
 ##Convert all rows to character
-data.td$Title<- unlist(lapply(data.td$Title, as.character))
+data.td$Title <- unlist(lapply(data.td$Title, as.character))
 
 }else if (date_info=="N"|date_info=="n"){
   
-    data.td$Title<-rep(NA,dim(data.td)[1])
+    data.td$Title <-rep (NA,dim(data.td)[1])
 }
 
-# Clean/create author column
+# Clean/create author column----------------------------------------------------
 
-## Check for titles
+## Check for author
 author_info<-readline('Does the data frame have authors associtated with each instance? (Y/N):  ')
 
-while(!title_info %in% c("Y","y","N","n")){
+while(!author_info %in% c("Y","y","N","n")){
   author_info<-readline("Does the data frame have authors associtated with each instance? (Y/N):   ")
 }
 
@@ -157,7 +193,7 @@ if(author_info=="Y"|author_info=="y"){
   
   author_col <- as.character(unlist(strsplit(author_col, ",")))
   
-  author_col_num<-match(title_col,columns)
+  author_col_num<-match(author_col,columns)
   
   ##Rename author column to "Author"
   colnames(data.td)[author_col_num]<- "Author"
@@ -170,7 +206,7 @@ if(author_info=="Y"|author_info=="y"){
   data.td$Author<-rep(NA,dim(data.td)[1])
 }
 
-# Clean/create URL column
+# Clean/create URL column-------------------------------------------------------
 
 ## Check for URLs
 url_info<-readline('Does the data frame have urls associtated with each instance? (Y/N):  ')
@@ -202,7 +238,7 @@ if(url_info=="Y"|url_info=="y"){
   data.td$URL<-rep(NA,dim(data.td)[1])
 }
 
-# Clean/create NewsSource column
+# Clean/create NewsSource column------------------------------------------------
 
 ## Check for NewsSource
 newssource_info<-readline('Does the data frame have news sources associtated with each instance? (Y/N):  ')
@@ -222,8 +258,8 @@ if(newssource_info=="Y"|newssource_info=="y"){
   newssource_col <- as.character(unlist(strsplit(newssource_col, ",")))
   
   newssource_col_num<-match(newssource_col,columns)
-  ##Rename author column to "URL"
-  colnames(data.td)[newssource_col_num]<- "URL"
+  ##Rename author column to "NewsSource"
+  colnames(data.td)[newssource_col_num]<- "NewsSource"
   
   ##Convert all rows to character
   data.td$NewsSource<- unlist(lapply(data.td$NewsSource, as.character))
@@ -232,7 +268,7 @@ if(newssource_info=="Y"|newssource_info=="y"){
   data.td$NewsSource<-rep(NA,dim(data.td)[1])
 }
 
-# Clean/create ID Number column
+# Clean/create ID Number column-------------------------------------------------
 
 ## Check for ID Numbers
 articleno_info<-readline('Does the data frame have identifiers associtated with each instance? (Y/N):  ')
@@ -257,17 +293,17 @@ if(articleno_info=="Y"|articleno_info=="y"){
   colnames(data.td)[articleno_col_num]<- "ArticleNo"
   
   ##Convert all rows to integer
-  data.td$ArticleNo<- unlist(lapply(data.td$ArticleNo, as.integer))
+  # data.td$ArticleNo<- unlist(lapply(data.td$ArticleNo, as.numeric))
   
 }else if (articleno_info=="N"|articleno_info=="n"){
   
-  data.td$ArticleNo<-test3<-seq(dim(data.td)[1])
-  data.td$ArticleNo<- unlist(lapply(data.td$ArticleNo, as.integer))
+  data.td$ArticleNo <- seq(dim(data.td)[1])
+  # data.td$ArticleNo<- unlist(lapply(data.td$ArticleNo, as.integer))
 }
 
 
 # Create custom_reader map
-custom_reader <- tm::readTabular(
+custom_reader <- readTabular(
   mapping = list(title = "Title",author = "Author",
                  date = "Date", url = "URL", source = "NewsSource",
                  content = "Text", id = "ArticleNo"))
