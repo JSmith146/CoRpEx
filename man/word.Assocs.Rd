@@ -2,14 +2,14 @@
 % Please edit documentation in R/WordAssocs_Function.R
 \name{word.Assocs}
 \alias{word.Assocs}
-\title{Produces a time series plot of terms associated with a user defined word up to a specified correlation limit}
+\title{Time series plot of terms associated with a specified word.}
 \usage{
 word.Assocs(data.td, term, corlimit)
 }
 \arguments{
 \item{data.td}{A tidy dataset}
 
-\item{term}{A user defined character vector containing no spaces}
+\item{term}{A user defined term, or vector of terms.}
 
 \item{corlimit}{A user defined numeric correlation limit between 0 and 1}
 }
@@ -17,5 +17,29 @@ word.Assocs(data.td, term, corlimit)
 Time series line plot of words associated with \code{term}
 }
 \description{
-description
+Create a time series line plot of words associated with a
+  specified keyword. Words are associated down to the defined correlation
+  limit. Terms must be a character vector containing no spaces.
+}
+\details{
+This function first identifies each document which contains the user
+  specified \code{keyword} and omits all those which do not. The function 
+  next finds all words correlated with the user specified \code{keyword} down
+  to the user defined  correlation limit (\code{corlimit}). With the 
+  correlated words now identified, the function identifies dates listed in 
+  the date column and sums the number of documents associated with the 
+  identified \code{keyword} and all other correlated words, generating a line
+  plot to represent the findings for each. These line plots are then layered 
+  on top of each other for comparison purposes. This output is useful in 
+  highlighting increases in document production for correlated terms in
+  reference to a specific word. It illustrates how different words are used
+  more/less over the course of time.
+}
+\examples{
+\donttest{ 
+word.Assocs(Articles, "hurricane", .6)
+word.Assocs(Articles, c("hurricane","tornado"), .75)
+}
+
+
 }

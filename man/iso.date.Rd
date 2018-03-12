@@ -2,7 +2,7 @@
 % Please edit documentation in R/iso_dateCorpus_Function.R
 \name{iso.date}
 \alias{iso.date}
-\title{Creates a subcorpus based on user specified date ranges}
+\title{Create a subcorpus based on user specified date ranges}
 \usage{
 iso.date(data.td, Beg.date, End.date)
 }
@@ -17,5 +17,26 @@ iso.date(data.td, Beg.date, End.date)
 Creates a subcorpus containing only documents produced between \code{Beg.date} and \code{End.date}
 }
 \description{
-description
+Create a reduced subcorpus containing documents produces within
+  a defined date range.
+}
+\details{
+This function establishes \code{Beg.date} as the beginning date and 
+  \code{End.date} as the ending date. It then identifies all rows of data 
+  whose associated dates fall on or between these dates. These identified
+  rows of data within the corpus are then used to create a new subcorpus.
+
+\describe{ 
+   \item{Date Formats}{Dates must be input in one of the following formats:}
+   \item{}{"6aug2005"}
+   \item{}{"6august2005"}
+   \item{}{"08-06-2005"}
+   \item{}{"06-08-2005"}
+   \item{}{"2006-08-06" }}
+}
+\examples{
+\donttest{
+Subcorpus <- iso.date(Articles, "12may2017","19may2017")
+Subcorpus <- iso.date(Articles, "12-05-2017","19-05-2017")
+}
 }

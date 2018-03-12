@@ -8,7 +8,7 @@
 #' @param x A user defined term sparsity limit
 #' @return Attaches a new column to \code{data.td} identifying each document in a corpus as belonging to a specific topic
 #' @export
-#' @import ldatuning topicmodels rlang tm
+#' @import ldatuning topicmodels tm rlang
 #' @importFrom utils View
 #' @examples
 #' \donttest{

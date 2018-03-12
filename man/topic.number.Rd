@@ -2,18 +2,32 @@
 % Please edit documentation in R/topicNumber_Function.R
 \name{topic.number}
 \alias{topic.number}
-\title{Produces a plot identifying the estimated correct number of topics to choose. Based on the `ldatuning` package.}
+\title{Estimate the correct number of hidden topics to choose.}
 \usage{
-topic.number(data.td, x = 0.9)
+topic.number(data.td, x = 0.9, k = 16)
 }
 \arguments{
 \item{data.td}{A tidy dataset}
 
 \item{x}{A user defined term sparsity limit}
+
+\item{k}{A user defined number of topics to identify}
 }
 \value{
 Plot indicating the estimated number of topics found within the corpus, \code{data.td}
 }
 \description{
-description
+This function provides a plot to assist a user in identifying
+  the correct numner of \emph{k} topics.
+}
+\details{
+This function allows for the effective transition of data into the
+  \code{ldatuning} package. Provided the number of topics \code{k}, the 
+  function will generate both a maximization and minization plot indicating 
+  the optimal estimated number of topics for a specified corpus.
+}
+\examples{
+\donttest{
+topic.number(Articles,k=50)
+}
 }

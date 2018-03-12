@@ -2,9 +2,9 @@
 % Please edit documentation in R/topicModels_Function.R
 \name{topic.models}
 \alias{topic.models}
-\title{Determines and classifies documents within a corpus to a user defined number of topics}
+\title{Uncover and assign topics to documents within a corpus}
 \usage{
-topic.models(data.td, k = 16, x = 0.9)
+topic.models(data.td, k = 2, x = 0.9)
 }
 \arguments{
 \item{data.td}{A tidy dataset}
@@ -17,5 +17,13 @@ topic.models(data.td, k = 16, x = 0.9)
 Attaches a new column to \code{data.td} identifying each document in a corpus as belonging to a specific topic
 }
 \description{
-description
+This function utilizes Latent Dirichlet Allocation (LDA) and the
+  \code{topicmodels} package to allow a user to define a specified number of
+  \code{k} hidden topics. Once identified, each document's topic is assigned
+  to a new column in the dataset for further analysis.
+}
+\examples{
+\donttest{
+Articles<-topic.models(Articles, k=10)
+}
 }

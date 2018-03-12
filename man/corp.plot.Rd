@@ -2,7 +2,7 @@
 % Please edit documentation in R/corpusPlot_Function.R
 \name{corp.plot}
 \alias{corp.plot}
-\title{Produces a time series plot of the frequency of articles within a corpus by date}
+\title{Time series plot of document frequency}
 \usage{
 corp.plot(data.td)
 }
@@ -13,5 +13,15 @@ corp.plot(data.td)
 Time series line plot of documents in \code{data.td} by day
 }
 \description{
-description
+Produces a time series plot of the frequency of documents within a
+  corpus by publication date.
+}
+\details{
+This function first identifies dates listed in the date column. It 
+  then sums the number of documents associated with each identified calendar 
+  date and generates a line plot for visual representation of these findings.
+  This output is useful in highlighting increases in document production, 
+  which may identify blocks of time in which interesting events may have
+  occurred. Using the 'iso.date' function, these observed increases can be
+  converted into subset corpuses used for further analysis.
 }

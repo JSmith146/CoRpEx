@@ -2,18 +2,33 @@
 % Please edit documentation in R/bigramNetwork_Function.R
 \name{bigram.network}
 \alias{bigram.network}
-\title{Produces a network graph of most frequent bigrams found throughout the corpus}
+\title{Network graph of most frequent bigrams found throughout the corpus}
 \usage{
 bigram.network(data.td, freq)
 }
 \arguments{
 \item{data.td}{A tidy dataset}
 
-\item{freq}{A user defined numeric vector containing an user defined limit of most frequent bigrams to include}
+\item{freq}{A user defined numeric vector containing an user defined limit of
+most frequent bigrams to include}
 }
 \value{
 A network graph of the most frequent bigrams down to a user defined \code{freq}
 }
 \description{
-description
+This function visualizes the most frequent words that co-occur
+  throughout a corpus.
+}
+\details{
+This function identifies all of the bigrams (two word co-occurrences
+  in a sequence of text) in a corpus, sums the frequency of occurrence for 
+  each bigram, and sorts the list in descending order. The function then 
+  generates an undirected network graph connecting each word (node) in the
+  bigram. These words are connected by edges (lines) whose thickness varies based
+  on the frequency of occurrence for each bigram.
+}
+\examples{
+\donttest{
+bigram.network(Articles, 200)
+}
 }

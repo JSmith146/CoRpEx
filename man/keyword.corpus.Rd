@@ -2,18 +2,28 @@
 % Please edit documentation in R/keywordCorpus_Function.R
 \name{keyword.corpus}
 \alias{keyword.corpus}
-\title{Creates a subcorpus based on a user defined keyword}
+\title{Create a subcorpus based on a user specified keyword}
 \usage{
 keyword.corpus(data.td, keyword)
 }
 \arguments{
 \item{data.td}{A tidy dataset}
 
-\item{keyword}{A user defined keyword}
+\item{keyword}{A user specified keyword}
 }
 \value{
 Creates a subcorpus with only documents containing \code{keyword}
 }
 \description{
-description
+Create a reduced subcorpus of documents which contain a specified keyword.
+}
+\details{
+This function will create a new subcorpus of documents, from the
+  original corpus,  in which each document contains the user specified
+  \code{keyword}. All other documents will be excluded from this subcorpus.
+}
+\examples{
+\donttest{
+hurricane <- keyword.corpus(Articles, "hurricane")
+}
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mergeTerms_Function.R
 \name{mergeTerms}
 \alias{mergeTerms}
-\title{User can choose to either transform, merge, separate, or delete terms from a corpus}
+\title{Transform, merge, separate, or delete terms from a corpus}
 \usage{
 mergeTerms(data.td, term, term.replacement)
 }
@@ -17,5 +17,21 @@ mergeTerms(data.td, term, term.replacement)
 Permanently alters the corpus by replacing all instances of \code{term} with \code{term.replacement}
 }
 \description{
-description
+Manipulate the content of text that will be analyzed. Merge like terms into a single term, replace names
+  found in text, and remove content deemed irrelevant.
+}
+\details{
+Supplied a search term and a replacement term, this function seeks 
+  to identify each instance of the search term within the corpus and replace 
+  it with the replacement term. Should the user elect to delete a term, instead of replacing it, the 
+  replacement term should be identified as "" within the function. **Warning: 
+  Once a term is deleted from the corpus it can not be replaced. To return
+  the term to the analysis, the corpus must be rebuilt to its previous state.
+}
+\examples{
+\donttest{
+Articles <- mergeTerms(Articles,"Affordable Care Act","ACA")
+Articles <- mergeTerms(Articles,"White House", "White_House")
+Articles <- mergeTerms(Articles, "Fox News", "")
+}
 }

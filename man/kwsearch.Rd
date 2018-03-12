@@ -2,7 +2,7 @@
 % Please edit documentation in R/keywordSearch_Function.R
 \name{kwsearch}
 \alias{kwsearch}
-\title{Produces a time series plot of the frequency of articles, containing a user specified keyword, within a corpus by date}
+\title{Time series line plot of the frequency of documents containing a user specified keyword}
 \usage{
 kwsearch(data.td, keyword)
 }
@@ -12,8 +12,25 @@ kwsearch(data.td, keyword)
 \item{keyword}{A user defined keyword}
 }
 \value{
-Time series line plot of documents in \code{data.td}  which contain \code{keyword} by day
+Time series line plot of documents in \code{data.td} which contain \code{keyword} by day
 }
 \description{
-description
+Produces a time series plot of the frequency of documents within a
+  corpus containing a specified keyword. Points are delineated by publication date.
+}
+\details{
+This function first identifies each document which contains the user
+  specified \code{keyword} and omits all those which do not. It then
+  identifies dates listed in the date column and sums the number of documents
+  associated with each identified calendar date, generating a line plot to
+  represent these findings. This output is useful in highlighting increases
+  in document production surrounding a specific topic, which may identify
+  blocks of time in which interesting events may have occurred. Using the
+  'iso.date' function, these observed increases can be converted into subset
+  corpuses used for further analysis.
+}
+\examples{
+\donttest{
+kwsearch(Articles,"hurricane")
+} 
 }

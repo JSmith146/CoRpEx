@@ -2,7 +2,7 @@
 % Please edit documentation in R/corpusPrep_Function.R
 \name{corpusPrep}
 \alias{corpusPrep}
-\title{Allows the user check and prepare their corpus to be in a usable state for the remainder of the commands}
+\title{Check and prepare a corpus for use with functions in this package}
 \usage{
 corpusPrep(data.td)
 }
@@ -10,8 +10,35 @@ corpusPrep(data.td)
 \item{data.td}{A tidy dataset}
 }
 \value{
-Returns the same corpus, with appropriate column names, correct column classes, and prepped data
+Returns the corpus with correct column names and classes for further
+  analysis
 }
 \description{
-description
+For best use with this function it is best that data frames have
+  values for the following columns:
+  \describe{
+    \item{Title}{Character vector containing the title of each document}
+    \item{Author}{Character vector containing the name of the associated
+    author}
+    \item{Date}{Vector of publication dates in either the "Date","POSIXct",
+    or "POSIXt" format}
+    \item{}{Dates should be one of the following forms:}
+      \item{}{yyyymmdd hh:mm:ss ex.("20170806 00:00:00")}
+      \item{}{yyyy-mm-dd ex.("2017-08-06")}
+      \item{}{yyyymmdd ex.("20170806")}
+      \item{}{mm-dd-yyyy ex.("08-06-2017")}
+      \item{}{dd-mm-yyyy ex.("06-08-2017")}
+      \item{}{ddmmyyyy ex.("06082017")}
+    \item{URL}{Character vector of associated url links}
+    \item{source}{Character vector of associated publication sources}
+    \item{ArticleNo}{Numeric vector of associated identification numbers of
+    each document}
+    \item{Text}{Character vector containing the body of the text to be
+    analyzed}
+    }
+}
+\examples{
+\donttest{
+clean_data<-corpusPrep(mayAritcles) 
+}
 }
