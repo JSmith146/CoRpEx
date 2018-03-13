@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = TRUE)
 setwd("C:/Users/El Jefe/Documents/Learning R/OPER 782")
 ```
 
-```{r, echo = FALSE, messages = FALSE, warning=FALSE}
+```{r, eval=F, echo = FALSE, messages = FALSE, warning=FALSE}
 list.of.packages <- c("xlsx","r2excel", "readxl", "knitr")
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
