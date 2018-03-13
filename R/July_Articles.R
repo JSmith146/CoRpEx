@@ -15,4 +15,6 @@
 #'    article was published} 
 #'    \item{Text}{Text from each news article} 
 #'    \item{ArticleNo}{Sequential list of each article in the dataset} }
+#'    
+#'    @export
 "July_Articles"

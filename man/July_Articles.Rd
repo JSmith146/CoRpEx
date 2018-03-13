@@ -24,5 +24,7 @@ A clean dataset containing 22,025 news articles from nine
    article was published} 
    \item{Text}{Text from each news article} 
    \item{ArticleNo}{Sequential list of each article in the dataset} }
+   
+   @export
 }
 \keyword{datasets}
