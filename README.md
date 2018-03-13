@@ -1,13 +1,11 @@
+CorpEx
+================
+Jeffrey Smith
+13 March 2018
 
 [![Build Status](https://travis-ci.org/JSmith146/CoRpExsvg?branch=master)](https://travis-ci.org/JSmith146/CoRpEx)
-------------------------------------------------------------------------------------------------------------------
 
-title: "CorpEx" author: "Jeffrey Smith" date: "21 February 2018" output: github\_document keep\_md: yes --- <!--don't edit README.md go to README.Rmd instead-->
-
-    ## Loading required package: rJava
-
-    ## Loading required package: xlsxjars
-
+<!--don't edit README.md go to README.Rmd instead-->
 Section 1 - Basic Information
 =============================
 

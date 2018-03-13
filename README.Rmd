@@ -2,26 +2,27 @@
 output:
   github_document: default
   html_document: default
----
-[![Build Status](https://travis-ci.org/JSmith146/CoRpExsvg?branch=master)](https://travis-ci.org/JSmith146/CoRpEx)
----
 title: "CorpEx"
 author: "Jeffrey Smith"
 date: "`r format(Sys.Date(), '%d %B %Y')`"
-output: github_document
 keep_md: yes
 ---
+
+
+[![Build Status](https://travis-ci.org/JSmith146/CoRpExsvg?branch=master)](https://travis-ci.org/JSmith146/CoRpEx)
+
+
 <!--don't edit README.md go to README.Rmd instead-->
 ```{r setup, include=FALSE, echo=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-```{r, echo = FALSE, messages = FALSE}
+```{r, eval = F, echo = FALSE, messages = FALSE}
 setwd("C:/Users/El Jefe/Documents/Learning R/OPER 782")
 ```
 
-```{r, echo = FALSE, messages = FALSE, warning=FALSE}
+```{r, eval = F, echo = FALSE, messages = FALSE, warning=FALSE}
 list.of.packages <- c("xlsx","r2excel", "readxl", "knitr")
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
