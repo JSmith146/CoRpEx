@@ -6,4 +6,5 @@ hidden/
 src/*.dll
 src/*.o
 src/*.so
-July_Articles.rdata
+data/July_Articles.rdata
+inst/in_work/
