@@ -18,5 +18,7 @@ Description: The CorpEx package is designed for novice R users who require the
 License: GPL (>= 2)
 Imports: tm, tidytext, ggplot2, shiny, scales, ggraph, widyr, tidyr, dplyr, igraph, ldatuning, topicmodels, lubridate, stringr, rlang
 RoxygenNote: 6.0.1
-Depends: R (>= 2.10)
+Depends: R (>= 3.3.0),
+ggraph,
+ggforce
 
