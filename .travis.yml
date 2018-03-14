@@ -3,8 +3,6 @@ cache: packages
 
 r_packages:
 - covr
-- widyr
-- ggraph
 
 after_success:
 - Rscript -e 'library(covr); codecov()'

@@ -16,7 +16,7 @@
 
 
 keyword.corpus<- function(data.td,keyword){
-  `%>%` <- dplyr::`%>%`
+ `%>%` <- dplyr::`%>%`
   #Error checking performs check of data class
   if(as.logical(sum(class(data.td) %in% c("tbl_df","tbl","data.frame")==0))) stop('Data is not in the correct form Data must be in a tibble or data frame')
   #is character
