@@ -31,8 +31,8 @@
 word.Assocs<- function(data.td, term, corlimit){
   `%>%` <- dplyr::`%>%`
   # term <- quo(term)
-  text<- quo(text)
-  ArticleNo <- quo(ArticleNo)
+  text<- dplyr::quo(text)
+  # ArticleNo <- dplyr::quo(ArticleNo)
   #Error checking performs check of data class
   if(as.logical(sum(class(data.td) %in% c("tbl_df","tbl","data.frame")==0))) stop('Data is not in the correct form Data must be in a tibble or data frame')
   #is character
@@ -42,13 +42,13 @@ word.Assocs<- function(data.td, term, corlimit){
   if(length(corlimit)!=1 | !is.numeric(corlimit) | corlimit >1 | corlimit <0) stop('Correlation limit must be a single value between 0 and 1')
   
   data_dtm<-data.td %>%
-    unnest_tokens(word,text) %>% 
-    filter(!word %in% tidytext::stop_words$word) %>% 
-    count(ArticleNo, word, sort = TRUE) %>%
-    ungroup() %>% 
-    cast_dtm(ArticleNo, word, n)
+    tidytext::unnest_tokens(word,text) %>% 
+    dplyr::filter(!word %in% tidytext::stop_words$word) %>% 
+    dplyr::count(data.td$ArticleNo, word, sort = TRUE) %>%
+    dplyr::ungroup() %>% 
+    tidytext::cast_dtm(data.td$ArticleNo, word, n)
   # Additional c
-  Assoc <- findAssocs(data_dtm, term , corlimit)
+  Assoc <- tm::findAssocs(data_dtm, term , corlimit)
   print(Assoc)
   plot_list <- list()
   for(k in 1:length(term)){ 
@@ -62,11 +62,11 @@ word.Assocs<- function(data.td, term, corlimit){
     for(i in 1:length(subject)){
       
       p[[i]]<-data.td %>%
-        filter(grepl(pattern = subject[i],x = data.td$text, ignore.case =T)) %>%
-        mutate(date=as.Date(date),term =subject[i]) %>%
-        group_by(date) %>%
-        summarise(n = n()) %>%
-        mutate(term=rep(subject[i]))
+        dplyr::filter(grepl(pattern = subject[i],x = data.td$text, ignore.case =T)) %>%
+        dplyr::mutate(date=as.Date(date),term =subject[i]) %>%
+        dplyr::group_by(date) %>%
+        dplyr::summarise(n = n()) %>%
+        dplyr::mutate(term=rep(subject[i]))
     }
     p = do.call(rbind,p)
     

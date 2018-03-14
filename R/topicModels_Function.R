@@ -29,7 +29,7 @@ topic.models <- function(data.td,k=2,x=.90){
   custom_reader <- readTabular(
     mapping = list(title = "title",author = "author",
                    date = "date", url = "url", source = "source",
-                   content = "text", id = "id"))
+                   content = "text", doc_id = "doc_id"))
   
   data.td.corp <-tm::VCorpus(
     tm::DataframeSource(data.td), 
