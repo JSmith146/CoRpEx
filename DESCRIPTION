@@ -16,9 +16,7 @@ Description: The CorpEx package is designed for novice R users who require the
              require that users have a robust data frame with, at a minimum, columns identified for the 
              document Id, date, and text data.
 License: GPL (>= 2)
-Imports: tm, tidytext, ggplot2, shiny, scales, ggraph, widyr, tidyr, dplyr, igraph, ldatuning, topicmodels, lubridate, stringr, rlang
+Imports: tm, tidytext, ggplot2, shiny, ggraph, ggforce, scales, widyr, tidyr, dplyr, igraph, ldatuning, topicmodels, lubridate, stringr, rlang
 RoxygenNote: 6.0.1
-Depends: R (>= 3.3.0),
-ggraph,
-ggforce
+Depends: R (>= 3.3.0)
 
