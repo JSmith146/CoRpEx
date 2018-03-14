@@ -1,13 +1,11 @@
+CorpEx
+================
+Jeffrey Smith
+14 March 2018
 
 [![Build Status](https://travis-ci.org/JSmith146/CoRpExsvg?branch=master)](https://travis-ci.org/JSmith146/CoRpEx)
-------------------------------------------------------------------------------------------------------------------
 
-title: "CorpEx" author: "Jeffrey Smith" date: "13 March 2018" output: github\_document keep\_md: yes --- <!--don't edit README.md go to README.Rmd instead-->
-
-    ## Loading required package: rJava
-
-    ## Loading required package: xlsxjars
-
+<!--don't edit README.md go to README.Rmd instead-->
 Section 1 - Basic Information
 =============================
 
@@ -68,7 +66,7 @@ This package requires no appearance/design constraints
 <tr class="odd">
 <td>1</td>
 <td>Topic Subset</td>
-<td>In-Work</td>
+<td>Complete</td>
 <td>Allows the user to create an independent sub-corpus based on a keyword</td>
 <td>Users can reduce the size of the corpus based on information relevant to their research</td>
 <td>Corpus name, Keyword, New corpus name</td>
@@ -78,7 +76,7 @@ This package requires no appearance/design constraints
 <tr class="even">
 <td>2</td>
 <td>Isolate Dates</td>
-<td>In-Work</td>
+<td>Complete</td>
 <td>Allows the user to create an independent sub-corpus based on a date range</td>
 <td>Users can reduce the size of the corpus based on information relevant to their research</td>
 <td>Corpus name, Start date, End date</td>
@@ -88,7 +86,7 @@ This package requires no appearance/design constraints
 <tr class="odd">
 <td>3</td>
 <td>Merge Terms</td>
-<td>In-Work</td>
+<td>Complete</td>
 <td>Allows the user to create, merge, and delete terms within a corpus</td>
 <td>Users can apply subject matter expertise to and remove noisy data from their analysis</td>
 <td>Corpus name, Term, Replacement term</td>
@@ -98,7 +96,7 @@ This package requires no appearance/design constraints
 <tr class="even">
 <td>4</td>
 <td>Print N-grams</td>
-<td>In-Work</td>
+<td>Complete</td>
 <td>Allows users to perform n-gram analysis on a corpus</td>
 <td>Users can navigate through varying n-grams to gain insight into the content of a corpus. Also, this plot provides a starting point to implement the merge terms function.</td>
 <td>Corpus name, N-gram, Number of terms to include (n)</td>
@@ -108,7 +106,7 @@ This package requires no appearance/design constraints
 <tr class="odd">
 <td>5</td>
 <td>Bigram Network</td>
-<td>In-Work</td>
+<td>Complete</td>
 <td>Performs network analysis on the most frequent bigrams found within a corpus</td>
 <td>Provides a visualization of bigram connections to allow the user to make inferences into the data.</td>
 <td>Corpus name, Frequency threshold</td>
@@ -118,7 +116,7 @@ This package requires no appearance/design constraints
 <tr class="even">
 <td>6</td>
 <td>Correlation Network</td>
-<td>In-Work</td>
+<td>Complete</td>
 <td>Performs network analysis on the most frequently correlated terms found within a corpus</td>
 <td>Provides a visualization of correlated words found in a corpus to allow the user to make inferences into the data.</td>
 <td>Corpus name, Correlation threshold</td>
@@ -128,7 +126,7 @@ This package requires no appearance/design constraints
 <tr class="odd">
 <td>7</td>
 <td>Topic Number</td>
-<td>In-Work</td>
+<td>Complete</td>
 <td>Provides the user with an estimate for the number of hidden topics within a corpus</td>
 <td>Presents the user with an expected number of k topics to use in the topic modeling analysis.</td>
 <td>Corpus name</td>
@@ -138,7 +136,7 @@ This package requires no appearance/design constraints
 <tr class="even">
 <td>8</td>
 <td>Topic Plot</td>
-<td>In-Work</td>
+<td>Complete</td>
 <td>Creates topic models for a corpus, designating each document within the corpus to a specific topic.</td>
 <td>Allows users to create sub-corpuses based on hidden topics found in a corpus.</td>
 <td>Corpus name, K topics</td>
@@ -148,7 +146,7 @@ This package requires no appearance/design constraints
 <tr class="odd">
 <td>9</td>
 <td>Term Association</td>
-<td>In-Work</td>
+<td>Complete</td>
 <td>Identifies words that are correlated with specific, user defined keywords and denotes the frequency of each word as they are mentioned over time.</td>
 <td>Identifies words highly related to user defined words of interest to uncover more information in the corpus.</td>
 <td>Corpus name, User defined term, Correlation limit (threshold)</td>
@@ -158,7 +156,7 @@ This package requires no appearance/design constraints
 <tr class="even">
 <td>10</td>
 <td>Corpus Plot</td>
-<td>In-Work</td>
+<td>Complete</td>
 <td>Allows the user to visualize the frequency of documents produced within a corpus over time.</td>
 <td>Users can identify periods in the data where there were fluctuations in the frequency of documents produced.</td>
 <td>Corpus name</td>
@@ -168,7 +166,7 @@ This package requires no appearance/design constraints
 <tr class="odd">
 <td>11</td>
 <td>Keyword Search</td>
-<td>In-Work</td>
+<td>Complete</td>
 <td>Allows the user to visualize the frequency of documents, containing a specific keyword, produced within a corpus over time.</td>
 <td>Based on a keyword, users can identify periods in the data where there was a fluctuation in the frequency of documents produced.</td>
 <td>Corpus name, User defined term</td>
