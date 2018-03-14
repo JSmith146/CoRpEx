@@ -1,8 +1,14 @@
-language: r
+
+language: R
+sudo: false
 cache: packages
 
-r_packages:
-- covr
+addons:
+  apt:
+    packages:
+      - libgsl0-dev # for topicmodels
+      - libudunits2-dev # for ggraph
+      - libggforce-dev #ggforce
 
 after_success:
-- Rscript -e 'library(covr); codecov()'
+- Rscript -e 'covr::codecov()'
