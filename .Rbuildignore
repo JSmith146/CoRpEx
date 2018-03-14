@@ -3,3 +3,6 @@
 README.Rmd
 ^\.travis\.yml$
 inst/in_work/
+^.*\.dll$
+^.*\.o$
+^.*\.so$
