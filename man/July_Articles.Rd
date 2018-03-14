@@ -11,7 +11,7 @@ July_Articles
 \description{
 A clean dataset containing 22,025 news articles from nine 
    recognized news sources collected between July 01 - July 31, 2017. 
- 
+ @export
  \describe{ 
    \item{Title}{The title of each news article} 
    \item{Author}{Identifies the
