@@ -1,0 +1,47 @@
+---
+title: "Elliott CorpEx Review"
+author: "1st Lt Jake Elliott"
+date: "15 Mar 2018"
+output: html_document
+---
+
+
+## Accuracy
+
+### Are the results accurate?
+
+* Yes - most functions generate the claimed output (exlcuding those explicitly mentioned as non-functioning)
+
+### Is it clear how the results were computed?
+
+* As clear as they can be to someone unfamiliar with these methods, yes. Documentation is rich, argument and function decsriptions are clear and spot on.
+
+## Compilation
+
+### Did the analytic work?
+
+* Yes! There some functions explicitly mentioned as non-functioning, and all others produce the desired results. 
+
+* No installation errors; data set loaded properly; any dependencies were installed, as well.
+
+### Were errors encountered when executing code according to documentation?
+
+* During a run of `iso.date()`, had to force quit R due to a freeze:
+  + e.g. `iso.date(July_Articles, "6july2017", "20july2017")` caused a freeze; could be due to the size of the data or some other minor thing
+  
+* I wouldn't say there were explicit errors, but most functions I used took a good amount of time. I don't know if it's because I'm using to large of a data set or if I've misspecified something.
+
+## Ease of use
+
+### Is it clear how to use the analytic?
+
+* On the surface, yes. As I said, the documentation is great a for describing what's required and essentially what is happening. But, I ran into some issues with run time, and it's probably because the corpus I was using (the provided `July_Articles` data set) was too large. If novel examples can be worked with smaller data sets, I think there ought to be a disclaimer somewhere mentioning the relationship between runtime and the size of the provided data set.
+
+### Are the visualizations/plots interpretable?
+
+* I think they could be with smaller data sets, but with just the provided set (and even half that) the plots are a little busy. It could also be the function arguments I'm passing, but I've stuck to the example arguments.
+
+## Overall
+
+Great variety of funcionality; the scope of the work is impressive. Bummer about the dependency issues for some functions, but overall this is a sweet package. **Oustanding (50/50)**
+
