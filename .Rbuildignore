@@ -6,3 +6,4 @@ inst/in_work/
 ^.*\.dll$
 ^.*\.o$
 ^.*\.so$
+inst/gallagher_review/
