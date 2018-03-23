@@ -6,7 +6,8 @@ output: github_document
 keep_md: yes
 ---
 
-[![Build Status](https://travis-ci.org/JSmith146/CoRpExsvg?branch=master)](https://travis-ci.org/JSmith146/CoRpEx)
+[![Build Status](https://travis-ci.org/JSmith146/CoRpEx.svg?branch=master)](https://travis-ci.org/JSmith146/CoRpEx)
+[![CircleCI](https://circleci.com/gh/JSmith146/CoRpEx.svg?style=svg)](https://circleci.com/gh/JSmith146/CoRpEx)
 
 <!--don't edit README.md go to README.Rmd instead-->
 ```{r setup, include=FALSE, echo=FALSE, message=FALSE}

@@ -1,9 +1,9 @@
 CorpEx
 ================
 Jeffrey Smith
-15 March 2018
+23 March 2018
 
-[![Build Status](https://travis-ci.org/JSmith146/CoRpExsvg?branch=master)](https://travis-ci.org/JSmith146/CoRpEx)
+[![Build Status](https://travis-ci.org/JSmith146/CoRpEx.svg?branch=master)](https://travis-ci.org/JSmith146/CoRpEx) [![CircleCI](https://circleci.com/gh/JSmith146/CoRpEx.svg?style=svg)](https://circleci.com/gh/JSmith146/CoRpEx)
 
 <!--don't edit README.md go to README.Rmd instead-->
 Section 1 - Basic Information
