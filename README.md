@@ -3,7 +3,7 @@ CorpEx
 Jeffrey Smith
 23 March 2018
 
-[![Build Status](https://travis-ci.org/JSmith146/CoRpEx.svg?branch=master)](https://travis-ci.org/JSmith146/CoRpEx) [![CircleCI](https://circleci.com/gh/JSmith146/CoRpEx.svg?style=svg)](https://circleci.com/gh/JSmith146/CoRpEx)
+[![Build Status](https://travis-ci.org/JSmith146/CoRpEx.svg?branch=master)](https://travis-ci.org/JSmith146/CoRpEx) [![CircleCI](https://circleci.com/gh/JSmith146/CoRpEx.svg?style=svg)](https://circleci.com/gh/JSmith146/CoRpEx) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/JSmith146/CoRpEx?branch=master&svg=true)](https://ci.appveyor.com/project/JSmith146/CoRpEx)
 
 <!--don't edit README.md go to README.Rmd instead-->
 Section 1 - Basic Information
