@@ -1,0 +1,288 @@
+---
+title: "Review"
+author: "CPT James Gallagher"
+date: "March 14, 2018"
+output: html_document
+keep_md: yes
+---
+
+```{r eval = T, echo = T}
+library(CorpEx)
+library(tictoc)
+data("July_Articles")
+
+```
+
+This evaluation will be a function by function evaluation
+with an overall analysis at the end. The data will be conducted
+using a condensed dataset of 100 observations, and in instances
+where that condensed dataset fails, then the whole dataset will be used.
+
+##Function by Function definition
+
+
+### * `keyword.corpus()` & `iso.date()`
+
+First we will use the two given functions to generate two smaller
+datasets. Additionally, we will generate a third random dataset
+of 100 documents to evaluate the functions. This will allow
+us to ensure that we are using the functions on a variety
+of inputs and generating appropriate outputs without errors.
+
+```{r results='hide'}
+
+###Random 100 articles
+set.seed(123)
+condensed <- July_Articles[sample(x = July_Articles$ArticleNo, size = 100, replace = F),]
+
+## keyword Corpus
+hurricane <- keyword.corpus(July_Articles, keyword = "hurricane")
+
+
+### date time corpus
+
+july4th <- iso.date(July_Articles, Beg.date = "4july2017", End.date = "4july2017")
+
+```
+
+This generates 3 different datasets.
+
+
+### * `word.Assocs()`
+
+```{r, echo = T, eval = T}
+
+tryCatch(word.Assocs(condensed, "trump", corlimit = 0.6),
+         error = function(e) e)
+
+tryCatch(word.Assocs(hurricane, "hurricane", corlimit = 0.6),
+         error = function(e) e)
+
+tryCatch(word.Assocs(july4th, "president", corlimit = 0.6),
+         error = function(e) e)
+
+```
+
+The output that should occur is a time series line plot of words
+associated with the term. However, an error occurs and
+no plot is generated. Copying the example from the function call 
+shows
+
+```{r eval = T, echo = T}
+
+tic("Word Association from example")
+tryCatch(word.Assocs(July_Articles, "hurricane", 0.6),
+         error = function(e) e)
+toc()
+
+```
+
+However, another error message is generated.
+
+### * `bigram.network()`
+
+```{r}
+
+tryCatch(bigram.network(condensed, 200),
+         error = function(e) e)
+
+tryCatch(bigram.network(hurricane, 200),
+         error = function(e) e)
+
+tryCatch(bigram.network(july4th, 200),
+         error = function(e) e)
+
+
+```
+
+This function also generates an error  for 2 of the 3
+data sets when calculating. Both of the two that failed 
+could be related to a small dataset size of `r nrow(condensed)`
+and `r nrow(hurricane)`. The `july4th` dataset
+consists of `r nrow(july4th)` which is a relatively larger dataset. 
+
+Using the entire dataset results in the following:
+
+```{r eval = T}
+tic("bigram network condensed")
+tryCatch(bigram.network(July_Articles, 200),
+         error = function(e) e)
+toc()
+
+```
+
+
+This generates the network diagram of the associated bigrams.
+This plot generates a hard to read network diagram and also
+takes a significant time to calculate.
+
+### * `corp.plot()`
+
+This is intended to generate a line plot for the number
+of documents gathered per day. 
+
+
+```{r}
+
+tryCatch(corp.plot(condensed),
+         error = function(e) e)
+
+tryCatch(corp.plot(hurricane),
+         error = function(e) e)
+
+tryCatch(corp.plot(july4th),
+         error = function(e) e)
+
+```
+
+As the line plot shows, this graph generates quickly and looks
+to be accurate. The message for the July 4th dataset follows
+due to it consisting of datasets from only one day.
+
+
+### * `cor.network()`
+
+This is intended to generate a network graph of the most
+correlated word pairs down to a user defined `corlimit`
+
+```{r}
+
+tryCatch(cor.network(condensed, corlimit = 0.6),
+         error = function(e) e)
+
+tryCatch(cor.network(hurricane, corlimit = 0.75),
+         error = function(e) e)
+
+tryCatch(cor.network(july4th, corlimit = 0.55),
+         error = function(e) e)
+
+```
+
+The `condensed` dataset again fails. Using a small dataset like this
+generates issues, but the other two generated plotsthat made sense 
+provided insight into which words were most commonly used together.
+This is useful and in line with the expected output.
+
+```{r, eval = T}
+tic("corpus line plot")
+tryCatch(cor.network(July_Articles, corlimit = 0.6),
+         error = function(e) e)
+toc()
+
+```
+
+This generates correctly, however with  such a large dataset
+the plots are generally difficult to view and understand. Using
+the `keyword` or `iso.date` is critical to providing good
+insight into the data.
+
+
+### * `kwsearch()
+
+This function should generate a line graph with the number
+of times that the chosen key word is found on each day.
+
+```{r}
+
+tryCatch(kwsearch(condensed, "president"),
+         error = function(e) e)
+
+tryCatch(kwsearch(hurricane, "hurricane"),
+         error = function(e) e)
+
+tryCatch(kwsearch(july4th, "hurricane"),
+         error = function(e) e)
+
+
+```
+
+This function generates 3 different line plots and again
+identifies that the July 4th dataset only plots one data point because
+it consists of only one day's worth of data.
+
+
+### * `ngram.print()
+
+This function should generate a table of associated n-grams.
+
+```{r} 
+
+tryCatch(ngram.print(condensed, ngram = 2, num = 10),
+         error = function(e) e)
+
+tryCatch(ngram.print(hurricane, ngram = 2, num = 10),
+         error = function(e) e)
+
+tryCatch(ngram.print(july4th, ngram = 2, num = 10),
+         error = function(e) e)
+
+
+
+```
+
+These plots and tables are useful outputs and follow from the 
+generated table outputting to an equivalently sized bar chart
+in the plot. This data seems to be useful for the next step
+of merging terms.
+
+
+### * `mergeTerms()
+
+
+This can take the output from before and merge or remove
+terms deemed irrelevant. For example, "Thomson" appears
+to be a journalist for the "Reuters" news network. Therefore, 
+we can eliminate his name since we do not  need it for analysis.
+
+```{r}
+
+condensed1 <- mergeTerms(condensed, term = "Thomson", term.replacement = "")
+
+hurricane1 <- mergeTerms(hurricane, term = "Thomson", term.replacement = "")
+
+july4th1 <- mergeTerms(july4th, term = "Thomson", term.replacement = "")
+
+
+```
+
+
+We can check if this worked by doing a keyword search using
+that term
+
+```{r}
+
+kwsearch(condensed1, "Thomson")
+
+kwsearch(hurricane1, "Thomson")
+
+kwsearch(july4th1, "Thomson")
+```
+
+We see that there are no occurrences of that term in the corpus.
+Therefore, the function appears to work.
+
+
+
+## Overall Analysis
+Overall, this package performs a number of valuable functions
+such as generating a smaller dataset based on keywords or
+a date range. Additionally, the correlation network and n-gram
+networks provide useful information about how words are paired
+together to relay information. Unfortunately, a few functions
+returned errors on function calls that should have evaluated
+properly. Additionally, these errors were not clear as to what
+caused the issue or provided recommendations on how to fix.
+
+Another point for improvement would be the lack of a vignette
+or overall package documentation to explain the package. I had to
+use a lot of trial and error to understand the functions and which
+order to apply the functions to gain the most understanding of
+the data.
+
+## Overall Grade: 45/50
+
+While the package works on the whole, a few functions generate
+errors that are not clear as to why the errors are present.
+These errors seem relatively easy to correct and the package
+can be installed and without those features until they're
+corrected.
