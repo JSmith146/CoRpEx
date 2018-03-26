@@ -4,14 +4,12 @@
 \alias{topic.models}
 \title{Uncover and assign topics to documents within a corpus}
 \usage{
-topic.models(data.td, k = 2, x = 0.9)
+topic.models(data.td, k = 2)
 }
 \arguments{
 \item{data.td}{A tidy dataset}
 
 \item{k}{User defined number of topics}
-
-\item{x}{A user defined term sparsity limit}
 }
 \value{
 Attaches a new column to \code{data.td} identifying each document in a corpus as belonging to a specific topic

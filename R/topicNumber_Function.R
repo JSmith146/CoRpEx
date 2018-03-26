@@ -6,7 +6,6 @@
 #'   function will generate both a maximization and minization plot indicating 
 #'   the optimal estimated number of topics for a specified corpus.
 #' @param data.td A tidy dataset
-#' @param x A user defined term sparsity limit
 #' @param k A user defined number of topics to identify
 #' @return Plot indicating the estimated number of topics found within the corpus, \code{data.td}
 #' @export
@@ -18,27 +17,23 @@
 
 
 ####Topic Model Number####
-topic.number <- function(data.td,x=.90,k=16){
+topic.number <- function(data.td,k=16){
   `%>%` <- dplyr::`%>%`
+  text <-dplyr::quo(text)
+  word <-dplyr::quo(word)
   
   #Error checking performs check of data class
   if(as.logical(sum(class(data.td) %in% c("tbl_df","tbl","data.frame")==0))) stop('Data is not in the correct form Data must be in a tibble or data frame')
   
   # Convert the data frame to a Corpus
-  custom_reader <- readTabular(
-    mapping = list(title = "title",author = "author",
-                   date = "date", url = "url", source = "source",
-                   content = "text", id = "id"))
+  data.td$id <- as.character(data.td$id)
   
-  data.td.corp <-tm::VCorpus(
-    tm::DataframeSource(data.td), 
-    readerControl = list(reader = custom_reader))
-  
-  # Convert the corpus to a Document Term Matrix
-  data_dtm <- tm::DocumentTermMatrix(data.td.corp, control = list( stemming = F, stopwords = TRUE,
-                                                               minWordLength = 2, removeNumbers = TRUE, removePunctuation = TRUE))
-  
-  data_dtm <- tm::removeSparseTerms(data_dtm, x)
+  data_dtm <- data.td %>% 
+    dplyr::group_by(id) %>% 
+    tidytext::unnest_tokens(word,text) %>% 
+    dplyr::anti_join(tidytext::stop_words) %>% 
+    dplyr::count(id, word, sort =T) %>% 
+    tidytext::cast_dtm(id, word,n)
   
   # Find the optimal number of topics to perform LDA with
   result <- ldatuning::FindTopicsNumber(

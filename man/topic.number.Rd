@@ -4,12 +4,10 @@
 \alias{topic.number}
 \title{Estimate the correct number of hidden topics to choose.}
 \usage{
-topic.number(data.td, x = 0.9, k = 16)
+topic.number(data.td, k = 16)
 }
 \arguments{
 \item{data.td}{A tidy dataset}
-
-\item{x}{A user defined term sparsity limit}
 
 \item{k}{A user defined number of topics to identify}
 }

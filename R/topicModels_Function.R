@@ -5,7 +5,6 @@
 #'   to a new column in the dataset for further analysis.
 #' @param data.td A tidy dataset
 #' @param k User defined number of topics
-#' @param x A user defined term sparsity limit
 #' @return Attaches a new column to \code{data.td} identifying each document in a corpus as belonging to a specific topic
 #' @export
 #' @import topicmodels tm dplyr
@@ -20,27 +19,20 @@
 
 
 ####Find Topics####
-topic.models <- function(data.td,k=2,x=.90){
+topic.models <- function(data.td,k=2){
   
   #Error checking performs check of data class
   if(as.logical(sum(class(data.td) %in% c("tbl_df","tbl","data.frame")==0))) stop('Data is not in the correct form Data must be in a tibble or data frame')
+  text <-dplyr::quo(text)
+  word <-dplyr::quo(word)
+  data.td$id <- as.character(data.td$id)
   
-
-  custom_reader <- readTabular(
-    mapping = list(title = "title",author = "author",
-                   date = "date", url = "url", source = "source",
-                   content = "text", doc_id = "doc_id"))
-  
-  data.td.corp <-tm::VCorpus(
-    tm::DataframeSource(data.td), 
-    readerControl = list(reader = custom_reader))
-  
-  # Convert the corpus to a Document Term Matrix
-  data_dtm <- tm::DocumentTermMatrix(data.td.corp, control = list( stemming = F, stopwords = TRUE,
-                                                               minWordLength = 2, removeNumbers = TRUE, removePunctuation = TRUE))
-  
-  data_dtm <- tm::removeSparseTerms(data_dtm, x)
-
+  data_dtm <- data.td %>% 
+    dplyr::group_by(id) %>% 
+    tidytext::unnest_tokens(word,text) %>% 
+    dplyr::anti_join(tidytext::stop_words) %>% 
+    dplyr::count(id, word, sort =T) %>% 
+    tidytext::cast_dtm(id, word,n)
   
   
   #Set parameters for Gibbs sampling
