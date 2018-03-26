@@ -43,7 +43,8 @@ devtools::install_github("JSmith146/CoRpEx")
   The CorpEx package is designed for novice R users who require the ability to maneuver through large corpuses of textual documents to discover contextual insight. This package will provide users with the ability to effectively and efficiently explore these large textual data corpuses through the utilization of various exploratory text mining techniques. Users will have the ability to explore corpuses through the application of various text mining statistical techniques such as n-gram analysis, term frequency analysis, term correlation analysis, and topic modeling. This package will build upon multiple existing R text mining packages including `tm`, `topicmodels`, `quanteda`, and `ldatuning` to name a few. Other packages used in this package provide functionality for data structure, i.e. `tidyr`, and base level code used for execution, i.e. `tidyverse`, `widyr`,and `tidytext`. Visualization packages used include `ggplot`, `igraph`, and `ggraph`.
 
 ## Using CorpEx
-![CorpEx Methodology](./man/figures/static/CorpEx Methodology.png)
+<!-- ![CorpEx Methodology](./man/figures/static/CorpEx Methodology.png) -->
+\figure{CorpEx Methodology.png}
 
 
 The CorpEx methodology focuses on three different phases that users can implement iteratively throughout the course of their exploration. Techniques used in this package consist of methods to visualize components of a corpus (corp plot and keyword search), methods to reduce and specify the size of the corpus (topic subset and date isolation), methods to manipulate the content of the corpus (merge terms), and methods to provide visualizations of text mining analysis (term association, topic modeling, n-gram analysis, and bigram and correlation network analysis). Implementation of this package will require that users have a robust data frame in which, at a minimum, columns are identified for the document Id, date, and text data.
