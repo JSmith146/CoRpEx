@@ -29,7 +29,7 @@ The CorpEx package is designed for novice R users who require the ability to man
 Using CorpEx
 ------------
 
-![CorpEx Methodology](C:/Users/El%20Jefe/Documents/GitHub/CorpEx/inst/in_work/CorpEx%20Methodology.png) The CorpEx methodology focuses on three different phases that users can implement iteratively throughout the course of their exploration.for users a Techniques used in this package consist of methods to visualize components of a corpus (corp plot and keyword search), methods to reduce and specify the size of the corpus (topic subset and date isolation), methods to manipulate the content of the corpus (merge terms), and methods to provide visualizations of text mining analysis (term association, topic modeling, n-gram analysis, and bigram and correlation network analysis). Implementation of this package will require that users have a robust data frame in which, at a minimum, columns are identified for the document Id, date, and text data. Users will access this analytic product through either the use of implementing the package or through the use of the online R shiny application.
+![CorpEx Methodology](C:/Users/El%20Jefe/Documents/GitHub/CorpEx/img/CorpEx%20Methodology.png) The CorpEx methodology focuses on three different phases that users can implement iteratively throughout the course of their exploration.for users a Techniques used in this package consist of methods to visualize components of a corpus (corp plot and keyword search), methods to reduce and specify the size of the corpus (topic subset and date isolation), methods to manipulate the content of the corpus (merge terms), and methods to provide visualizations of text mining analysis (term association, topic modeling, n-gram analysis, and bigram and correlation network analysis). Implementation of this package will require that users have a robust data frame in which, at a minimum, columns are identified for the document Id, date, and text data. Users will access this analytic product through either the use of implementing the package or through the use of the online R shiny application.
 
 User Exploration Phase
 ----------------------
@@ -44,7 +44,7 @@ This phase provides the user the functionality to explore the dataset to obtain 
 
     Allows the user to create an independent sub-corpus by isolating only relevant documents produced within a specified date range.
 
--   `ngram.print`
+-   `ngram.print()`
 
     Allows users to navigate various n-grams to gain insight into the content of a corpus. This feature creates an inverted bar chart identifying the top *n* most frequent n-grams. This feature also provides a starting point to implement the merge terms function. Ultimately, users will be able to infer the content of the corpus and identify terms that need to be created, merged, or deleted.
 
