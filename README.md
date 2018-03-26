@@ -30,7 +30,6 @@ Using CorpEx
 ------------
 
 <!-- ![CorpEx Methodology](./man/figures/static/CorpEx Methodology.png) -->
-
 The CorpEx methodology focuses on three different phases that users can implement iteratively throughout the course of their exploration. Techniques used in this package consist of methods to visualize components of a corpus (corp plot and keyword search), methods to reduce and specify the size of the corpus (topic subset and date isolation), methods to manipulate the content of the corpus (merge terms), and methods to provide visualizations of text mining analysis (term association, topic modeling, n-gram analysis, and bigram and correlation network analysis). Implementation of this package will require that users have a robust data frame in which, at a minimum, columns are identified for the document Id, date, and text data.
 
 User Exploration Phase
