@@ -29,7 +29,7 @@
    cor.network<-function(data.td,corlimit){
      `%>%` <- dplyr::`%>%`
      text<-quo(text)
-     ArticleNo <- quo(ArticleNo)
+     id <- quo(id)
      name<-quo(name)
      correlation<-quo(correlation)
      #Error Checking
@@ -39,15 +39,15 @@
     book_words <- data.td %>%
       unnest_tokens(word,text) %>% 
       filter(!word %in% tidytext::stop_words$word) %>% 
-      count(ArticleNo, word, sort = TRUE) %>%
+      count(id, word, sort = TRUE) %>%
       ungroup() %>%
-      group_by(ArticleNo) %>%
+      group_by(id) %>%
       top_n(25)
     
     word_cor <- book_words %>% 
       group_by(word) %>% 
       filter(n()>=20) %>%
-      pairwise_cor(word,ArticleNo) %>% 
+      pairwise_cor(word,id) %>% 
       arrange(desc(correlation))
     
     set.seed(2016)
