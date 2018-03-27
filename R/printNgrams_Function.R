@@ -24,7 +24,7 @@ ngram.print<-function(data.td, ngram=1, num=15){
   `%>%` <- dplyr::`%>%`
   # ngram<-quo(ngram)
   # num <- quo(num)
-  text<-dplyr::quo(text)
+  # text<-dplyr::quo(text)
   word1<- dplyr::quo(word1)
   word2<- dplyr::quo(word2)
   word3<- dplyr::quo(word3)
@@ -52,7 +52,7 @@ ngram.print<-function(data.td, ngram=1, num=15){
     data.unigram %>%
       dplyr::top_n(num) %>%
       ggplot(aes(data=unigram, reorder(unigram,n), n, sort=T)) +
-      geom_col() +
+      ggplot2::geom_col() +
       theme(text = element_text(size=26)) +
       ggtitle("Term Frequency")+
       labs(x = "term", y = "frequency") +
@@ -75,7 +75,7 @@ ngram.print<-function(data.td, ngram=1, num=15){
     data.bigram %>%
       dplyr::top_n(num) %>%  
       ggplot2::ggplot(ggplot2::aes(reorder(bigram,n), n, sort=T)) +
-      geom_col() +
+      ggplot2::geom_col() +
       theme(text = element_text(size=26)) +
       ggtitle("Bigram Frequency")+
       labs(x = "bigram", y = "frequency") +
@@ -96,7 +96,7 @@ ngram.print<-function(data.td, ngram=1, num=15){
     data.trigram %>%
       dplyr::top_n(num) %>%  
       ggplot2::ggplot(ggplot2::aes(reorder(trigram,n), n, sort=T)) +
-      geom_col() +
+      ggplot2::geom_col() +
       theme(text = element_text(size=26)) +
       ggtitle("Trigram Frequency")+
       labs(x = "trigram", y = "frequency") +
@@ -117,7 +117,7 @@ ngram.print<-function(data.td, ngram=1, num=15){
     data.fourgram %>%
       dplyr::top_n(num) %>%  
       ggplot2::ggplot(ggplot2::aes(reorder(fourgram,n), n, sort=T)) +
-      geom_col() +
+      ggplot2::geom_col() +
       theme(text = element_text(size=26)) +
       ggtitle("Fourgram Frequency")+
       labs(x = "fourgram", y = "frequency") +
@@ -139,7 +139,7 @@ ngram.print<-function(data.td, ngram=1, num=15){
     data.fivegram %>%
       dplyr::top_n(num) %>%  
       ggplot2::ggplot(ggplot2::aes(reorder(fivegram,n), n, sort=T)) +
-      geom_col() +
+      ggplot2::geom_col() +
       theme(text = element_text(size=26)) +
       ggtitle("Fivegram Frequency")+
       labs(x = "fivegram", y = "frequency") +
