@@ -32,6 +32,8 @@ word.Assocs<- function(data.td, term, corlimit){
   `%>%` <- dplyr::`%>%`
   # term <- quo(term)
   text<- dplyr::quo(text)
+  date<- dplyr::quo(date)
+ 
   # ArticleNo <- dplyr::quo(ArticleNo)
   #Error checking performs check of data class
   if(as.logical(sum(class(data.td) %in% c("tbl_df","tbl","data.frame")==0))) stop('Data is not in the correct form Data must be in a tibble or data frame')
@@ -41,12 +43,12 @@ word.Assocs<- function(data.td, term, corlimit){
   
   if(length(corlimit)!=1 | !is.numeric(corlimit) | corlimit >1 | corlimit <0) stop('Correlation limit must be a single value between 0 and 1')
   
-  data_dtm<-data.td %>%
+  data_dtm <- data.td %>% 
+    dplyr::group_by(id) %>% 
     tidytext::unnest_tokens(word,text) %>% 
-    dplyr::filter(!word %in% tidytext::stop_words$word) %>% 
-    dplyr::count(data.td$ArticleNo, word, sort = TRUE) %>%
-    dplyr::ungroup() %>% 
-    tidytext::cast_dtm(data.td$ArticleNo, word, n)
+    dplyr::anti_join(tidytext::stop_words) %>% 
+    dplyr::count(id, word, sort =T) %>% 
+    tidytext::cast_dtm(id, word,n)
   # Additional c
   Assoc <- tm::findAssocs(data_dtm, term , corlimit)
   print(Assoc)

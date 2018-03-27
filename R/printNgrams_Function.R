@@ -24,7 +24,7 @@ ngram.print<-function(data.td, ngram=1, num=15){
   `%>%` <- dplyr::`%>%`
   # ngram<-quo(ngram)
   # num <- quo(num)
-  # text<-dplyr::quo(text)
+  text<-dplyr::quo(text)
   word1<- dplyr::quo(word1)
   word2<- dplyr::quo(word2)
   word3<- dplyr::quo(word3)
